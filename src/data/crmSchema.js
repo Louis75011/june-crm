@@ -321,9 +321,9 @@ export const statistiqueColumns = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions LP' },
-    { key: 'leadsGeneres', label: 'Leads' },
+    { key: 'prospectsGeneres', label: 'Prospects' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'leadsConvertis', label: 'Convertis' },
+    { key: 'prospectsConvertis', label: 'Convertis' },
     {
         key: 'sourceDonnees', label: 'Source', type: 'badge', colorMap: {
             'GA4': '#3b82f6', 'Meta': '#8b5cf6', 'Google Ads': '#10b981', 'Manuel': '#6b7280'
@@ -337,10 +337,10 @@ export const statistiqueFormFields = [
     { key: 'impressions', label: 'Impressions', type: 'number' },
     { key: 'clics', label: 'Clics', type: 'number' },
     { key: 'sessionsLanding', label: 'Sessions landing', type: 'number' },
-    { key: 'leadsGeneres', label: 'Leads générés', type: 'number' },
+    { key: 'prospectsGeneres', label: 'Prospects générés', type: 'number' },
     { key: 'coutTotal', label: 'Coût total (€)', type: 'currency' },
-    { key: 'leadsTransmisClient', label: 'Leads transmis client', type: 'number' },
-    { key: 'leadsConvertis', label: 'Leads convertis', type: 'number' },
+    { key: 'prospectsTransmisClient', label: 'Prospects transmis client', type: 'number' },
+    { key: 'prospectsConvertis', label: 'Prospects convertis', type: 'number' },
     { key: 'sourceDonnees', label: 'Source de données', type: 'select', options: ['GA4', 'Meta', 'Google Ads', 'Manuel'] },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];
@@ -351,10 +351,10 @@ export const statistiqueViewFields = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions landing' },
-    { key: 'leadsGeneres', label: 'Leads générés' },
+    { key: 'prospectsGeneres', label: 'Prospects générés' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'leadsTransmisClient', label: 'Leads transmis client' },
-    { key: 'leadsConvertis', label: 'Leads convertis' },
+    { key: 'prospectsTransmisClient', label: 'Prospects transmis client' },
+    { key: 'prospectsConvertis', label: 'Prospects convertis' },
     { key: 'sourceDonnees', label: 'Source' },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];

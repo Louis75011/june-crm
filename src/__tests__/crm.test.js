@@ -4,15 +4,22 @@
  */
 
 // ==================== 1. API CRUD (mock fetch) ====================
-import { clientsAPI, prospectsAPI, programmesAPI } from '../services/api';
+import { clientsAPI, prospectsAPI, programmesAPI, _resetServerDetection } from '../services/api';
 
 const mockData = [
     { id: 1, nom: 'La CAPS', type: 'Coopérative', statut: 'Actif' },
     { id: 2, nom: 'Nexity', type: 'Promoteur', statut: 'Prospect' }
 ];
 
+/** Mock un health check réussi (premier appel de détection serveur) */
+const mockHealthCheck = () => {
+    global.fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ status: 'ok' }) });
+};
+
 beforeEach(() => {
     global.fetch = jest.fn();
+    _resetServerDetection(); // Réinitialiser la détection serveur entre chaque test
+    mockHealthCheck();       // Premier appel = health check
 });
 
 afterEach(() => {

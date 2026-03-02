@@ -1,0 +1,258 @@
+$blue-mary: #1F3A52;
+$blue-sky: #5B9BD5;
+$border-gray: #CCCCCC;
+$gold: #C5A666;
+
+.tableWrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 75vh;
+  border: 1px solid $border-gray;
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  th {
+    background-color: $blue-mary;
+    color: #FFFFFF;
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    position: relative;  // requis pour le handle absolu
+    overflow: hidden;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  td {
+    padding: 4px 6px;
+    border-bottom: 1px solid $border-gray;
+    font-size: 0.75em;
+    vertical-align: middle;
+    white-space: nowrap;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  tr:hover {
+    background-color: #F5F5F5;
+  }
+
+  .rowConverti {
+    background-color: #E8F5E9;
+    &:hover { background-color: #C8E6C9; }
+  }
+
+  .rowRefuse {
+    background-color: #FFEBEE;
+    &:hover { background-color: #FFCDD2; }
+  }
+
+  .rowSansReponse {
+    background-color: #FFF3E0;
+    &:hover { background-color: #FFE0B2; }
+  }
+
+  .rowFroid {
+    background-color: #E3F2FD;
+    &:hover { background-color: #BBDEFB; }
+  }
+}
+
+.tableFixed {
+  // La largeur est contrôlée par inline style (totalWidth px) pour correspondre exactement aux colonnes
+  // On neutralise les contraintes héritées de .table pour que le style inline soit respecté
+  table-layout: fixed;
+  width: unset;
+  min-width: unset;
+}
+
+// Colonne survolée lors d'un drag de réorganisation
+.dragOver {
+  background-color: lighten($blue-mary, 12%) !important;
+  outline: 2px dashed rgba(255, 255, 255, 0.7);
+  outline-offset: -2px;
+}
+
+// Handle de redimensionnement des colonnes
+.resizeHandle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 2;
+  background: transparent;
+  transition: background 0.15s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    top: 20%;
+    width: 2px;
+    height: 60%;
+    background: rgba(255,255,255,0.25);
+    border-radius: 1px;
+    transition: background 0.15s;
+  }
+
+  &:hover::after {
+    background: rgba(255,255,255,0.9);
+  }
+
+  &:hover {
+    background: rgba(255,255,255,0.12);
+  }
+}
+
+.clickableRow {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #EAF2F8;
+  }
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  
+  &:hover {
+    background-color: #2d4e6a !important;
+  }
+}
+
+.actionsCol {
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background-color: $blue-mary !important;
+  min-width: 95px;
+  width: 95px;
+}
+
+tr td.actionsCol {
+  background-color: #FFFFFF;
+  border-right: 2px solid $gold;
+}
+
+
+tr.rowConverti td.actionsCol {
+  background-color: #E8F5E9;
+}
+
+tr.rowRefuse td.actionsCol {
+  background-color: #FFEBEE;
+}
+
+tr.rowSansReponse td.actionsCol {
+  background-color: #FFF3E0;
+}
+
+tr.rowFroid td.actionsCol {
+  background-color: #E3F2FD;
+}
+
+tr:hover td.actionsCol {
+  background-color: #F5F5F5;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+
+  button {
+    padding: 3px 6px;
+    font-size: 0.85em;
+    min-width: 26px;
+  }
+}
+
+.canalBadge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  font-weight: 600;
+  background-color: #E3F2FD;
+  color: $blue-mary;
+  white-space: nowrap;
+}
+
+.notesCol {
+  min-width: 200px;
+  max-width: 350px;
+}
+
+.notesContent {
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 0.9em;
+  line-height: 1.3;
+  color: #555;
+  white-space: normal;
+}
+
+.noResults {
+  padding: 30px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+// Links styling
+.table td a {
+  color: $blue-mary;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableWrapper {
+    max-height: 60vh;
+  }
+
+  .table {
+    font-size: 0.7em;
+    min-width: 1600px;
+  }
+
+  .table td,
+  .table th {
+    padding: 4px 5px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    gap: 2px;
+  }
+}

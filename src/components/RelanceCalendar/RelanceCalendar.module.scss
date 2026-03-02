@@ -1,0 +1,61 @@
+$blue-mary: #1F3A52;
+$gold: #C5A666;
+$dark-gray: #333333;
+
+.calendarSection {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    color: $blue-mary;
+    margin-bottom: 20px;
+  }
+}
+
+.calendarTable {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: $gold;
+    color: #FFFFFF;
+    padding: 12px;
+    text-align: left;
+  }
+
+  td {
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #CCCCCC;
+  }
+
+  .jour {
+    color: $blue-mary;
+    font-size: 0.9em;
+    text-transform: uppercase;
+  }
+
+  .action {
+    color: #960018;
+    margin: 5px 0;
+  }
+
+  .moyen {
+    color: $dark-gray;
+    font-size: 0.85em;
+    margin-top: 5px;
+  }
+
+  .objet {
+    font-weight: normal;
+  }
+}
+
+.note {
+  margin-top: 20px;
+  color: $dark-gray;
+  font-style: italic;
+}

@@ -1,0 +1,28 @@
+# Configuration GitLab CI/CD pour déployer sur GitLab Pages
+image: node:18-alpine
+
+variables:
+  NODE_OPTIONS: --max_old_space_size=4096
+
+pages:
+  stage: deploy
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - node_modules/
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+    - pnpm config set store-dir .pnpm-store
+  script:
+    - pnpm install --frozen-lockfile
+    - pnpm run build
+    - rm -rf public
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

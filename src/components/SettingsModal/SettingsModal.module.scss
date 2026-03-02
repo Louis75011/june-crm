@@ -1,0 +1,117 @@
+$blue-mary: #1F3A52;
+$gold: #C5A666;
+
+.settingsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.settingGroup {
+    h4 {
+        color: $blue-mary;
+        font-size: 1em;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+.settingRow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 0.9em;
+    }
+}
+
+.inputRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    input[type="range"] {
+        flex: 1;
+        height: 6px;
+        border-radius: 3px;
+        background: #ddd;
+        cursor: pointer;
+        accent-color: $gold;
+
+        &::-webkit-slider-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: $gold;
+            cursor: pointer;
+        }
+    }
+}
+
+.rangeValue {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    color: $blue-mary;
+    background: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.hint {
+    font-size: 0.75em;
+    color: #888;
+    margin-top: 2px;
+}
+
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+
+    &:hover {
+        border-color: $gold;
+        background: #fff;
+    }
+
+    &.active {
+        border-color: $blue-mary;
+        background: $blue-mary;
+        color: white;
+
+        .toggleText {
+            color: white;
+        }
+    }
+}
+
+.toggleIcon {
+    font-size: 1.3em;
+}
+
+.toggleText {
+    font-weight: 500;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}

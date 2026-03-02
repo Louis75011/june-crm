@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-june-white: #FAF8F5;
+  --color-june-gray: #E8E4DF;
+  --color-june-teal: #1A5C5A;
+  --color-june-pink: #D4A0A0;
+  --color-june-terracotta: #C4784A;
+}
+
+@layer base {
+  body {
+    @apply bg-june-white text-june-teal font-sans font-light antialiased;
+  }
+  
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+}
+
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

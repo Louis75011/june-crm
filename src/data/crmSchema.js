@@ -69,7 +69,7 @@ export const programmeColumns = [
 
 export const programmeFormFields = [
     { key: 'nom', label: 'Nom du programme', type: 'text', required: true, placeholder: 'ex: Les Traversées' },
-    { key: 'clientId', label: 'Client (ID)', type: 'number', required: true },
+    { key: 'clientId', label: 'Client', type: 'number', required: true },
     { key: 'ville', label: 'Ville du programme', type: 'text' },
     { key: 'adresse', label: 'Adresse du programme', type: 'text' },
     { key: 'typeProgramme', label: 'Type de programme', type: 'select', options: ['Neuf', 'BRS', 'Rénovation', 'Mixte', 'Autre'] },
@@ -84,7 +84,7 @@ export const programmeFormFields = [
 
 export const programmeViewFields = [
     { key: 'nom', label: 'Nom du programme' },
-    { key: 'clientId', label: 'Client (ID)' },
+    { key: 'clientId', label: 'Client' },
     { key: 'ville', label: 'Ville' },
     { key: 'adresse', label: 'Adresse' },
     { key: 'typeProgramme', label: 'Type de programme' },
@@ -123,7 +123,7 @@ export const campagneColumns = [
 
 export const campagneFormFields = [
     { key: 'nom', label: 'Nom de la campagne', type: 'text', required: true, placeholder: 'caps_lestraversees_lancement_v1' },
-    { key: 'programmeId', label: 'Programme (ID)', type: 'number', required: true },
+    { key: 'programmeId', label: 'Programme', type: 'number', required: true },
     { key: 'typeCampagne', label: 'Type de campagne', type: 'select', options: ['Lancement', 'Relance', 'Événement'] },
     { key: 'canalSource', label: 'Canal / Source', type: 'select', options: ['Meta Ads', 'Google Ads', 'Newsletter', 'Événement'] },
     { key: 'utmSource', label: 'utm_source', type: 'text' },
@@ -134,7 +134,7 @@ export const campagneFormFields = [
     { key: 'dateDebut', label: 'Date début', type: 'date' },
     { key: 'dateFin', label: 'Date fin', type: 'date' },
     { key: 'statut', label: 'Statut', type: 'select', options: ['Brouillon', 'Active', 'En pause', 'Terminée', 'Annulée'] },
-    { key: 'landingPageId', label: 'Landing page (ID)', type: 'number' },
+    { key: 'landingPageId', label: 'Landing page', type: 'number' },
     { key: 'impressions', label: 'Impressions', type: 'number' },
     { key: 'clics', label: 'Clics', type: 'number' },
     { key: 'notesPerformance', label: 'Notes performance', type: 'textarea' }
@@ -142,7 +142,7 @@ export const campagneFormFields = [
 
 export const campagneViewFields = [
     { key: 'nom', label: 'Nom de la campagne' },
-    { key: 'programmeId', label: 'Programme (ID)' },
+    { key: 'programmeId', label: 'Programme' },
     { key: 'typeCampagne', label: 'Type' },
     { key: 'canalSource', label: 'Canal / Source' },
     { key: 'utmSource', label: 'utm_source' },
@@ -175,7 +175,7 @@ export const landingpageColumns = [
 
 export const landingpageFormFields = [
     { key: 'nom', label: 'Nom de la page', type: 'text', required: true, placeholder: 'LP Les Traversées – Lancement V1' },
-    { key: 'programmeId', label: 'Programme (ID)', type: 'number', required: true },
+    { key: 'programmeId', label: 'Programme', type: 'number', required: true },
     { key: 'url', label: 'URL de la page', type: 'url', placeholder: 'https://' },
     { key: 'typePage', label: 'Type de page', type: 'select', options: ['Mini landing', 'Landing complète'] },
     { key: 'statut', label: 'Statut', type: 'select', options: ['Maquette', 'Dev', 'Préprod', 'Live', 'Archivée'] },
@@ -192,7 +192,7 @@ export const landingpageFormFields = [
 
 export const landingpageViewFields = [
     { key: 'nom', label: 'Nom de la page' },
-    { key: 'programmeId', label: 'Programme (ID)' },
+    { key: 'programmeId', label: 'Programme' },
     { key: 'url', label: 'URL', type: 'url' },
     { key: 'typePage', label: 'Type de page' },
     { key: 'statut', label: 'Statut' },
@@ -236,9 +236,9 @@ export const leadFormFields = [
     { key: 'telephone', label: 'Téléphone', type: 'tel' },
     { key: 'villeResidence', label: 'Ville de résidence', type: 'text' },
     { key: 'typologieRecherchee', label: 'Typologie recherchée', type: 'select', options: ['Studio', '2P', '3P', '4P', '5P', 'Maison', 'Autre'] },
-    { key: 'programmeId', label: 'Programme (ID)', type: 'number', required: true },
-    { key: 'landingPageSourceId', label: 'Landing page source (ID)', type: 'number' },
-    { key: 'campagneSourceId', label: 'Campagne source (ID)', type: 'number' },
+    { key: 'programmeId', label: 'Programme', type: 'number', required: true },
+    { key: 'landingPageSourceId', label: 'Landing page source', type: 'number' },
+    { key: 'campagneSourceId', label: 'Campagne source', type: 'number' },
     { key: 'utmSource', label: 'utm_source', type: 'text' },
     { key: 'utmMedium', label: 'utm_medium', type: 'text' },
     { key: 'utmCampaign', label: 'utm_campaign', type: 'text' },
@@ -258,7 +258,7 @@ export const leadViewFields = [
     { key: 'telephone', label: 'Téléphone' },
     { key: 'villeResidence', label: 'Ville' },
     { key: 'typologieRecherchee', label: 'Typologie' },
-    { key: 'programmeId', label: 'Programme (ID)' },
+    { key: 'programmeId', label: 'Programme' },
     { key: 'utmSource', label: 'utm_source' },
     { key: 'utmMedium', label: 'utm_medium' },
     { key: 'utmCampaign', label: 'utm_campaign' },
@@ -291,7 +291,7 @@ export const templateColumns = [
 
 export const templateFormFields = [
     { key: 'nom', label: 'Nom du template', type: 'text', required: true, placeholder: 'Confirmation inscription – Les Traversées' },
-    { key: 'programmeId', label: 'Programme (ID)', type: 'number', required: true },
+    { key: 'programmeId', label: 'Programme', type: 'number', required: true },
     { key: 'typeTemplate', label: 'Type de template', type: 'select', options: ['Confirmation', 'Relance', 'Newsletter'] },
     { key: 'statut', label: 'Statut', type: 'select', options: ['Brouillon', 'En validation', 'Validé', 'Livré'] },
     { key: 'dateLivraison', label: 'Date livraison', type: 'date' },
@@ -303,7 +303,7 @@ export const templateFormFields = [
 
 export const templateViewFields = [
     { key: 'nom', label: 'Nom du template' },
-    { key: 'programmeId', label: 'Programme (ID)' },
+    { key: 'programmeId', label: 'Programme' },
     { key: 'typeTemplate', label: 'Type' },
     { key: 'statut', label: 'Statut' },
     { key: 'dateLivraison', label: 'Date livraison', type: 'date' },
@@ -315,7 +315,7 @@ export const templateViewFields = [
 
 // ==================== STATISTIQUES CAMPAGNES ====================
 export const statistiqueColumns = [
-    { key: 'campagneId', label: 'Campagne (ID)' },
+    { key: 'campagneId', label: 'Campagne' },
     { key: 'periode', label: 'Période' },
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
@@ -331,7 +331,7 @@ export const statistiqueColumns = [
 ];
 
 export const statistiqueFormFields = [
-    { key: 'campagneId', label: 'Campagne (ID)', type: 'number', required: true },
+    { key: 'campagneId', label: 'Campagne', type: 'number', required: true },
     { key: 'periode', label: 'Période', type: 'text', placeholder: 'ex: Mars 2026' },
     { key: 'impressions', label: 'Impressions', type: 'number' },
     { key: 'clics', label: 'Clics', type: 'number' },
@@ -345,7 +345,7 @@ export const statistiqueFormFields = [
 ];
 
 export const statistiqueViewFields = [
-    { key: 'campagneId', label: 'Campagne (ID)' },
+    { key: 'campagneId', label: 'Campagne' },
     { key: 'periode', label: 'Période' },
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },

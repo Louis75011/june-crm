@@ -1,13 +1,14 @@
-$dark-bg: #1a1a2e;
-$orange-primary: #e05d26;
+$june-orange: #E05D26;
+$june-violet: #8B5CF6;
+$june-pink: #E8A0BF;
+$june-gray-200: #e4e4e7;
+$june-gray-800: #27272a;
 $white: #FFFFFF;
 
 .header {
-  background: $dark-bg;
-  color: $white;
-  padding: 14px 24px;
-  border-radius: 12px;
-  margin-bottom: 24px;
+  background: $white;
+  padding: 12px 28px;
+  border-bottom: 1px solid $june-gray-200;
 }
 
 .headerContent {
@@ -17,31 +18,46 @@ $white: #FFFFFF;
   gap: 16px;
 }
 
-.brand {
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.greeting {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $june-gray-800;
+}
+
+.subtitle {
+  font-size: 0.78rem;
+  color: #a1a1aa;
+  font-weight: 400;
+}
+
+.headerRight {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
 }
 
-.logoIcon {
-  font-size: 1.6rem;
-  color: $orange-primary;
-}
+.headerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid $june-gray-200;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.15s;
 
-.headerText {
-  text-align: left;
-
-  h1 {
-    font-size: 1.4em;
-    font-weight: 700;
-    margin-bottom: 2px;
-    letter-spacing: 0.3px;
-  }
-
-  p {
-    font-size: 0.8em;
-    opacity: 0.7;
-    font-weight: 400;
+  &:hover {
+    background: #f4f4f5;
+    border-color: #a1a1aa;
   }
 }
 
@@ -49,12 +65,15 @@ $white: #FFFFFF;
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: 8px;
+  padding-left: 16px;
+  border-left: 1px solid $june-gray-200;
 }
 
 .userName {
   font-size: 0.85rem;
   font-weight: 500;
-  opacity: 0.9;
+  color: $june-gray-800;
 }
 
 .userAvatar {
@@ -64,7 +83,7 @@ $white: #FFFFFF;
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: $orange-primary;
+  background: linear-gradient(135deg, $june-orange, $june-pink);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -72,23 +91,17 @@ $white: #FFFFFF;
 
 @media (max-width: 768px) {
   .header {
-    padding: 12px 16px;
+    padding: 10px 16px;
   }
 
   .headerContent {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    align-items: flex-start;
   }
 
-  .headerText {
-    text-align: center;
-
-    h1 {
-      font-size: 1.2em;
-    }
-
-    p {
-      font-size: 0.75em;
-    }
+  .headerRight {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

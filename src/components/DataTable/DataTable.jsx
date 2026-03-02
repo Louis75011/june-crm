@@ -1,9 +1,20 @@
 import styles from './DataTable.module.scss';
 
+// Map des clés de lookup : champ ID → entité de lookup
+const LOOKUP_KEY_MAP = {
+    clientId: 'clients',
+    programmeId: 'programmes',
+    campagneId: 'campagnes',
+    landingPageId: 'landingpages',
+    landingPageSourceId: 'landingpages',
+    campagneSourceId: 'campagnes',
+};
+
 /**
  * Composant tableau générique pour les entités June Lab CRM
+ * Supporte les lookups/relations pour résoudre les IDs en noms lisibles
  */
-const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxChars = 80 }) => {
+const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxChars = 80, lookupMaps = {} }) => {
     const filteredData = searchFilter
         ? data.filter(item =>
             Object.values(item).some(val =>
@@ -18,10 +29,25 @@ const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxC
         return str.length > max ? str.slice(0, max) + '…' : str;
     };
 
+    const resolveLookup = (key, value) => {
+        const lookupEntity = LOOKUP_KEY_MAP[key];
+        if (lookupEntity && lookupMaps[lookupEntity] && value != null) {
+            const resolved = lookupMaps[lookupEntity][value];
+            return resolved || `#${value}`;
+        }
+        return null;
+    };
+
     const renderCell = (item, col) => {
         const value = item[col.key];
 
         if (col.render) return col.render(value, item);
+
+        // Lookup resolution
+        const lookupName = resolveLookup(col.key, value);
+        if (lookupName) {
+            return <span className={styles.lookup} title={`ID: ${value}`}>{lookupName}</span>;
+        }
 
         if (col.type === 'badge') {
             const colorMap = col.colorMap || {};

@@ -1,8 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   Header,
-  Controls,
-  Tabs,
   DataTable,
   EntityForm,
   EntityViewModal,
@@ -29,18 +27,8 @@ import {
   templateColumns, templateFormFields, templateViewFields,
   statistiqueColumns, statistiqueFormFields, statistiqueViewFields
 } from './data/crmSchema';
+import juneLogo from './assets/june-lab-logo.png';
 import './App.scss';
-
-// Map API par clé d'onglet
-const API_MAP = {
-  clients: clientsAPI,
-  programmes: programmesAPI,
-  campagnes: campagnesAPI,
-  landingpages: landingpagesAPI,
-  leads: leadsAPI,
-  templates: templatesAPI,
-  statistiques: statistiquesAPI
-};
 
 // Map colonnes/champs par clé d'onglet
 const SCHEMA_MAP = {
@@ -52,6 +40,12 @@ const SCHEMA_MAP = {
   templates: { columns: templateColumns, formFields: templateFormFields, viewFields: templateViewFields },
   statistiques: { columns: statistiqueColumns, formFields: statistiqueFormFields, viewFields: statistiqueViewFields }
 };
+
+// Liens vers les landing pages déployées
+const LP_LINKS = [
+  { label: 'Les Traversées – CAPS', url: 'https://les-traversees-caps.vercel.app/', icon: '🏠' },
+  { label: 'Mini June Lab Immo Neuf', url: 'https://june-lab-immobilier-neuf.vercel.app/', icon: '🏢' },
+];
 
 function App() {
   // Hooks entités
@@ -67,11 +61,20 @@ function App() {
     clients, programmes, campagnes, landingpages, leads, templates, statistiques
   }), [clients, programmes, campagnes, landingpages, leads, templates, statistiques]);
 
+  // Lookup maps pour résoudre les relations (ID → nom)
+  const lookupMaps = useMemo(() => ({
+    clients: Object.fromEntries((clients.items || []).map(c => [c.id, c.nom])),
+    programmes: Object.fromEntries((programmes.items || []).map(p => [p.id, p.nom])),
+    campagnes: Object.fromEntries((campagnes.items || []).map(c => [c.id, c.nom])),
+    landingpages: Object.fromEntries((landingpages.items || []).map(lp => [lp.id, lp.nom])),
+  }), [clients.items, programmes.items, campagnes.items, landingpages.items]);
+
   const { settings, saveSettings } = useSettings();
   const { notification, showNotification } = useNotification();
 
   const [searchFilter, setSearchFilter] = useState('');
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabKey, setActiveTabKey] = useState('clients');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   // Modals
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -90,7 +93,7 @@ function App() {
   }, [settings.darkMode]);
 
   // Onglet actif
-  const activeTab = CRM_TABS[activeTabIndex] || CRM_TABS[0];
+  const activeTab = CRM_TABS.find(t => t.key === activeTabKey) || CRM_TABS[0];
   const activeKey = activeTab.key;
   const activeEntity = ENTITY_MAP[activeKey];
   const activeSchema = SCHEMA_MAP[activeKey];
@@ -175,44 +178,108 @@ function App() {
     }
   }, [saveSettings, showNotification]);
 
-  // Tabs config
-  const tabs = useMemo(() =>
-    CRM_TABS.map(tab => ({
-      icon: tab.icon,
-      label: tab.label,
-      content: (
-        <DataTable
-          columns={SCHEMA_MAP[tab.key].columns}
-          data={ENTITY_MAP[tab.key].items}
-          searchFilter={searchFilter}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onView={handleView}
-          maxChars={settings.maxChars}
-        />
-      )
-    })),
-    [ENTITY_MAP, searchFilter, settings.maxChars, handleEdit, handleDelete, handleView]);
-
   return (
-    <div className="container">
-      <Header adminUser={settings.adminUser} />
+    <div className="app-layout">
+      {/* ===== SIDEBAR ===== */}
+      <aside className={`sidebar ${sidebarCollapsed ? 'sidebar--collapsed' : ''}`}>
+        <div className="sidebar__brand">
+          <img src={juneLogo} alt="June Lab" className="sidebar__logo" />
+          {!sidebarCollapsed && <span className="sidebar__title">June Lab CRM</span>}
+        </div>
 
-      <Controls
-        onAddClick={() => setIsAddOpen(true)}
-        onExportClick={handleExport}
-        onImportClick={handleImport}
-        onSettingsClick={() => setIsSettingsOpen(true)}
-        onInfoClick={() => setIsInfoOpen(true)}
-        addLabel={`+ ${activeTab.entityName}`}
-        addContext={activeKey}
-        searchValue={searchFilter}
-        onSearchChange={setSearchFilter}
-      />
+        <nav className="sidebar__nav">
+          <div className="sidebar__section-label">Navigation</div>
+          {CRM_TABS.map(tab => (
+            <button
+              key={tab.key}
+              className={`sidebar__item ${activeTabKey === tab.key ? 'sidebar__item--active' : ''}`}
+              onClick={() => { setActiveTabKey(tab.key); setSearchFilter(''); }}
+              title={tab.label}
+            >
+              <span className="sidebar__item-icon">{tab.icon}</span>
+              {!sidebarCollapsed && <span className="sidebar__item-label">{tab.label}</span>}
+              {!sidebarCollapsed && (
+                <span className="sidebar__item-count">{ENTITY_MAP[tab.key].items?.length || 0}</span>
+              )}
+            </button>
+          ))}
+        </nav>
 
-      <Tabs tabs={tabs} onTabChange={setActiveTabIndex} />
+        <div className="sidebar__lp-section">
+          {!sidebarCollapsed && <div className="sidebar__section-label">Landing Pages Live</div>}
+          {LP_LINKS.map((lp, i) => (
+            <a key={i} href={lp.url} target="_blank" rel="noopener noreferrer" className="sidebar__lp-link" title={lp.label}>
+              <span className="sidebar__item-icon">{lp.icon}</span>
+              {!sidebarCollapsed && <span className="sidebar__item-label">{lp.label}</span>}
+              {!sidebarCollapsed && <span className="sidebar__lp-ext">↗</span>}
+            </a>
+          ))}
+        </div>
 
-      {/* Modal ajout */}
+        <div className="sidebar__footer">
+          <button className="sidebar__toggle" onClick={() => setSidebarCollapsed(c => !c)} title="Réduire / Étendre">
+            {sidebarCollapsed ? '»' : '«'}
+          </button>
+        </div>
+      </aside>
+
+      {/* ===== MAIN CONTENT ===== */}
+      <main className="main-content">
+        <Header
+          adminUser={settings.adminUser}
+          onSettingsClick={() => setIsSettingsOpen(true)}
+          onInfoClick={() => setIsInfoOpen(true)}
+        />
+
+        {/* Toolbar */}
+        <div className="toolbar">
+          <div className="toolbar__left">
+            <h2 className="toolbar__title">
+              <span className="toolbar__title-icon">{activeTab.icon}</span>
+              {activeTab.label}
+            </h2>
+            <button className="toolbar__btn toolbar__btn--primary" onClick={() => setIsAddOpen(true)}>
+              + Ajouter
+            </button>
+            <button className="toolbar__btn toolbar__btn--outline" onClick={handleExport}>
+              📥 Export
+            </button>
+            <button className="toolbar__btn toolbar__btn--outline" onClick={handleImport}>
+              📤 Import
+            </button>
+          </div>
+          <div className="toolbar__right">
+            <div className="toolbar__search">
+              <span className="toolbar__search-icon">🔍</span>
+              <input
+                type="text"
+                placeholder="Rechercher..."
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+              />
+              {searchFilter && (
+                <button className="toolbar__search-clear" onClick={() => setSearchFilter('')}>×</button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="content-area">
+          <DataTable
+            columns={activeSchema.columns}
+            data={activeEntity.items}
+            searchFilter={searchFilter}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onView={handleView}
+            maxChars={settings.maxChars}
+            lookupMaps={lookupMaps}
+          />
+        </div>
+      </main>
+
+      {/* ===== MODALS ===== */}
       <EntityForm
         isOpen={isAddOpen}
         onClose={() => setIsAddOpen(false)}
@@ -220,9 +287,9 @@ function App() {
         fields={activeSchema.formFields}
         title={`Ajouter ${activeTab.entityName}`}
         mode="add"
+        lookupMaps={lookupMaps}
       />
 
-      {/* Modal édition */}
       <EntityForm
         isOpen={isEditOpen}
         onClose={() => { setIsEditOpen(false); setEditingItem(null); }}
@@ -231,18 +298,18 @@ function App() {
         initialData={editingItem}
         title={`Modifier ${activeTab.entityName}`}
         mode="edit"
+        lookupMaps={lookupMaps}
       />
 
-      {/* Modal vue détaillée */}
       <EntityViewModal
         isOpen={isViewOpen}
         onClose={() => { setIsViewOpen(false); setViewingItem(null); }}
         data={viewingItem}
         fields={activeSchema.viewFields}
         title={`Détail ${activeTab.entityName}`}
+        lookupMaps={lookupMaps}
       />
 
-      {/* Modal confirmation suppression */}
       <ConfirmModal
         isOpen={isDeleteOpen}
         onClose={() => { setIsDeleteOpen(false); setItemToDelete(null); }}

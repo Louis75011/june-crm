@@ -61,6 +61,21 @@
     }
 }
 
+.lookup {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-primary, #8B5CF6);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: default;
+
+    &::before {
+        content: '🔗';
+        font-size: 0.7rem;
+    }
+}
+
 .actionsCol {
     width: 120px;
     text-align: center;

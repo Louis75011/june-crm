@@ -1,6 +1,4 @@
 export { default as Header } from './Header/Header';
-export { default as Controls } from './Controls/Controls';
-export { default as Tabs } from './Tabs/Tabs';
 export { default as DataTable } from './DataTable/DataTable';
 export { default as EntityForm } from './EntityForm/EntityForm';
 export { default as EntityViewModal } from './EntityViewModal/EntityViewModal';

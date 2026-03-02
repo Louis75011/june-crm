@@ -14,5 +14,53 @@
     "dateMiseAJour": "2026-03-01",
     "createdAt": "2026-03-01T10:00:00.000Z",
     "updatedAt": "2026-03-01T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "campagneId": 2,
+    "periode": "Mars 2026 (S1-S2)",
+    "impressions": 12800,
+    "clics": 540,
+    "sessionsLanding": 680,
+    "leadsGeneres": 1,
+    "coutTotal": 750,
+    "leadsTransmisClient": 0,
+    "leadsConvertis": 0,
+    "sourceDonnees": "Meta",
+    "dateMiseAJour": "2026-03-15",
+    "createdAt": "2026-03-15T10:00:00.000Z",
+    "updatedAt": "2026-03-15T10:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "campagneId": 3,
+    "periode": "Septembre 2025",
+    "impressions": 28500,
+    "clics": 960,
+    "sessionsLanding": 1450,
+    "leadsGeneres": 0,
+    "coutTotal": 1200,
+    "leadsTransmisClient": 0,
+    "leadsConvertis": 0,
+    "sourceDonnees": "Meta",
+    "dateMiseAJour": "2025-10-01",
+    "createdAt": "2025-10-01T10:00:00.000Z",
+    "updatedAt": "2025-10-01T10:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "campagneId": 4,
+    "periode": "Mars 2026 (S1)",
+    "impressions": 18700,
+    "clics": 720,
+    "sessionsLanding": 890,
+    "leadsGeneres": 2,
+    "coutTotal": 1400,
+    "leadsTransmisClient": 1,
+    "leadsConvertis": 0,
+    "sourceDonnees": "Google Ads",
+    "dateMiseAJour": "2026-03-08",
+    "createdAt": "2026-03-08T10:00:00.000Z",
+    "updatedAt": "2026-03-08T10:00:00.000Z"
   }
 ]

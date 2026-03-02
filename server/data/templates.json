@@ -9,7 +9,7 @@
     "espCible": "Brevo",
     "compatibleMobile": true,
     "testeLitmus": true,
-    "notes": "Template responsive, validé par le client.",
+    "notes": "Template responsive, validé par le client CAPS. Envoi automatique à chaque soumission formulaire LP Les Traversées. Taux d'ouverture constaté : 72%.",
     "createdAt": "2026-01-20T10:00:00.000Z",
     "updatedAt": "2026-01-25T10:00:00.000Z"
   },
@@ -18,13 +18,41 @@
     "nom": "Relance J+3 – Les Traversées",
     "programmeId": 1,
     "typeTemplate": "Relance",
+    "statut": "Validé",
+    "dateLivraison": "2026-02-15",
+    "espCible": "Brevo",
+    "compatibleMobile": true,
+    "testeLitmus": true,
+    "notes": "Relance automatique J+3 après inscription. Objet : « Votre projet aux Traversées avance ? » avec lien vers brochure PDF et prise de RDV. Taux d'ouverture 45%, CTR 12%.",
+    "createdAt": "2026-02-10T10:00:00.000Z",
+    "updatedAt": "2026-02-15T10:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "nom": "Confirmation inscription – Rooj Romainville",
+    "programmeId": 2,
+    "typeTemplate": "Confirmation",
     "statut": "En validation",
     "dateLivraison": null,
     "espCible": "Brevo",
     "compatibleMobile": true,
     "testeLitmus": false,
-    "notes": "En attente de validation client.",
-    "createdAt": "2026-02-10T10:00:00.000Z",
-    "updatedAt": "2026-02-10T10:00:00.000Z"
+    "notes": "Template en cours de création pour le pré-lancement Rooj Romainville. Attente validation charte graphique Rooj (vert #2D6A4F). Prévu pour déploiement mi-mars 2026.",
+    "createdAt": "2026-02-25T10:00:00.000Z",
+    "updatedAt": "2026-03-01T10:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "nom": "Newsletter trimestrielle – CAPS",
+    "programmeId": 1,
+    "typeTemplate": "Newsletter",
+    "statut": "Brouillon",
+    "dateLivraison": null,
+    "espCible": "Brevo",
+    "compatibleMobile": false,
+    "testeLitmus": false,
+    "notes": "Newsletter Q1 2026 pour la CAPS : actualités Les Traversées, avancement chantier, témoignage acquéreur Thomas Legrand, rappel avantages BRS. Cible : base leads non convertis + partenaires.",
+    "createdAt": "2026-03-01T10:00:00.000Z",
+    "updatedAt": "2026-03-02T10:00:00.000Z"
   }
 ]

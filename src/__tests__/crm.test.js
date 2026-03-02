@@ -13,7 +13,11 @@ const mockData = [
 
 /** Mock un health check réussi (premier appel de détection serveur) */
 const mockHealthCheck = () => {
-    global.fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ status: 'ok' }) });
+    global.fetch.mockResolvedValueOnce({
+        ok: true,
+        headers: { get: (h) => h === 'content-type' ? 'application/json; charset=utf-8' : null },
+        json: async () => ({ status: 'ok' })
+    });
 };
 
 beforeEach(() => {

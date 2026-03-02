@@ -18,7 +18,17 @@ async function isServerAvailable() {
     if (_useLocal !== null) return !_useLocal;
     try {
         const res = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(2000) });
-        _useLocal = !res.ok;
+        if (!res.ok) { _useLocal = true; }
+        else {
+            // Vérifier que c'est bien du JSON (pas le index.html du SPA rewrite Vercel)
+            const contentType = res.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                _useLocal = true;
+            } else {
+                const data = await res.json();
+                _useLocal = !data || data.status !== 'ok';
+            }
+        }
     } catch {
         _useLocal = true;
     }
@@ -85,12 +95,12 @@ function createEntityAPI(basePath) {
     const local = createLocalEntityAPI(entityName);
 
     return {
-        getAll:  createHybridMethod(server.getAll,  local.getAll),
+        getAll: createHybridMethod(server.getAll, local.getAll),
         getById: createHybridMethod(server.getById, local.getById),
-        create:  createHybridMethod(server.create,  local.create),
-        update:  createHybridMethod(server.update,  local.update),
-        delete:  createHybridMethod(server.delete,  local.delete),
-        import:  createHybridMethod(server.import,  local.import)
+        create: createHybridMethod(server.create, local.create),
+        update: createHybridMethod(server.update, local.update),
+        delete: createHybridMethod(server.delete, local.delete),
+        import: createHybridMethod(server.import, local.import)
     };
 }
 
@@ -107,7 +117,7 @@ export const statistiquesAPI = createEntityAPI('/statistiques');
 // ==================== SETTINGS ====================
 
 export const settingsAPI = {
-    get:    createHybridMethod(serverSettingsAPI.get,    localSettingsAPI.get),
+    get: createHybridMethod(serverSettingsAPI.get, localSettingsAPI.get),
     update: createHybridMethod(serverSettingsAPI.update, localSettingsAPI.update)
 };
 

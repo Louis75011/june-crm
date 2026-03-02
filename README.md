@@ -91,10 +91,6 @@ pnpm run dev:full
 │   └── utils/
 │       └── csvUtils.js   # Export/import CSV
 │
-├── landingpages/         # Sous-projets landing pages (React/Vite)
-│   ├── Les-Travers-es---CAPS-Saint-Denis-main/
-│   └── June-Lab---Immobilier-Neuf-main/
-│
 ├── vercel.json           # Config déploiement Vercel
 ├── .env.example          # Variables d'environnement (Brevo, GA4, Meta, Clarity)
 └── jest.config.js        # Config tests

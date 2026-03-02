@@ -209,7 +209,7 @@ export const landingpageViewFields = [
 ];
 
 // ==================== LEADS ====================
-export const leadColumns = [
+export const prospectColumns = [
     { key: 'nomComplet', label: 'Nom', width: '150px' },
     { key: 'email', label: 'Email' },
     { key: 'telephone', label: 'Téléphone' },
@@ -217,7 +217,7 @@ export const leadColumns = [
     { key: 'utmSource', label: 'Source' },
     { key: 'dateSoumission', label: 'Date', type: 'date' },
     {
-        key: 'statutLead', label: 'Statut', type: 'badge', colorMap: {
+        key: 'statutProspect', label: 'Statut', type: 'badge', colorMap: {
             'Nouveau': '#3b82f6', 'À contacter': '#f59e0b', 'Contacté': '#8b5cf6',
             'RDV': '#10b981', 'Converti': '#059669'
         }
@@ -230,7 +230,7 @@ export const leadColumns = [
     { key: 'transmisClient', label: 'Transmis', type: 'boolean' }
 ];
 
-export const leadFormFields = [
+export const prospectFormFields = [
     { key: 'nomComplet', label: 'Nom complet', type: 'text', required: true },
     { key: 'prenom', label: 'Prénom', type: 'text' },
     { key: 'email', label: 'Email', type: 'email', required: true },
@@ -244,7 +244,7 @@ export const leadFormFields = [
     { key: 'utmMedium', label: 'utm_medium', type: 'text' },
     { key: 'utmCampaign', label: 'utm_campaign', type: 'text' },
     { key: 'utmContent', label: 'utm_content', type: 'text' },
-    { key: 'statutLead', label: 'Statut lead', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
+    { key: 'statutProspect', label: 'Statut prospect', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
     { key: 'priorite', label: 'Priorité', type: 'select', options: ['Haute', 'Moyenne', 'Faible'] },
     { key: 'transmisClient', label: 'Transmis au client', type: 'checkbox' },
     { key: 'dateTransmissionClient', label: 'Date transmission client', type: 'date' },
@@ -252,7 +252,7 @@ export const leadFormFields = [
     { key: 'notes', label: 'Notes', type: 'textarea' }
 ];
 
-export const leadViewFields = [
+export const prospectViewFields = [
     { key: 'nomComplet', label: 'Nom complet' },
     { key: 'prenom', label: 'Prénom' },
     { key: 'email', label: 'Email' },
@@ -264,7 +264,7 @@ export const leadViewFields = [
     { key: 'utmMedium', label: 'utm_medium' },
     { key: 'utmCampaign', label: 'utm_campaign' },
     { key: 'dateSoumission', label: 'Date soumission', type: 'date' },
-    { key: 'statutLead', label: 'Statut lead' },
+    { key: 'statutProspect', label: 'Statut prospect' },
     { key: 'priorite', label: 'Priorité' },
     { key: 'transmisClient', label: 'Transmis au client', type: 'boolean' },
     { key: 'dateTransmissionClient', label: 'Date transmission', type: 'date' },

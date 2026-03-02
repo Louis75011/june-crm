@@ -1,13 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Modal from '../Modal/Modal';
 import styles from './SettingsModal.module.scss';
 
 const SettingsModal = ({ isOpen, onClose, settings, onSave }) => {
     const [localSettings, setLocalSettings] = useState(settings);
+    const originalDarkMode = useRef(settings.darkMode);
 
     useEffect(() => {
         setLocalSettings(settings);
+        originalDarkMode.current = settings.darkMode;
     }, [settings, isOpen]);
+
+    // Aperçu instantané du dark mode
+    useEffect(() => {
+        document.body.classList.toggle('dark-mode', localSettings.darkMode);
+    }, [localSettings.darkMode]);
 
     const handleChange = (key, value) => {
         setLocalSettings(prev => ({ ...prev, [key]: value }));
@@ -18,12 +25,18 @@ const SettingsModal = ({ isOpen, onClose, settings, onSave }) => {
         onClose();
     };
 
+    const handleCancel = () => {
+        // Restaurer le dark mode original si annulé
+        document.body.classList.toggle('dark-mode', originalDarkMode.current);
+        onClose();
+    };
+
     const handleToggleDarkMode = () => {
         handleChange('darkMode', !localSettings.darkMode);
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title="⚙️ Paramètres">
+        <Modal isOpen={isOpen} onClose={handleCancel} title="⚙️ Paramètres">
             <div className={styles.settingsContent}>
                 <div className={styles.settingGroup}>
                     <h4>📋 Affichage des tableaux</h4>
@@ -64,7 +77,7 @@ const SettingsModal = ({ isOpen, onClose, settings, onSave }) => {
                 </div>
 
                 <div className={styles.modalButtons}>
-                    <button type="button" className="btn btn-secondary" onClick={onClose}>
+                    <button type="button" className="btn btn-secondary" onClick={handleCancel}>
                         Annuler
                     </button>
                     <button type="button" className="btn btn-success" onClick={handleSave}>

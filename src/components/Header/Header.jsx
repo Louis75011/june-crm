@@ -1,9 +1,6 @@
 import styles from './Header.module.scss';
 
-let alexiaPhoto;
-try {
-    alexiaPhoto = new URL('../../assets/alexia-bc.jpg', import.meta.url).href;
-} catch { alexiaPhoto = null; }
+import alexiaPhoto from '../../assets/alexia.jpg';
 
 const Header = ({ adminUser, onSettingsClick, onInfoClick }) => {
     return (

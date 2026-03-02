@@ -1,24 +1,5 @@
 [
   {
-    "id": 1,
-    "nom": "LP Les Traversées – Lancement V1",
-    "programmeId": 1,
-    "url": "https://lestraversees.junelabs.fr",
-    "typePage": "Landing complète",
-    "statut": "Archivée",
-    "dateMiseEnLigne": "2026-01-15",
-    "ga4Installe": true,
-    "metaPixelInstalle": true,
-    "clarityInstalle": true,
-    "utmsConfigures": true,
-    "formulaireActif": false,
-    "sessions": 2340,
-    "lienMaquetteFigma": "https://figma.com/file/xxx",
-    "notes": "V1 initiale, remplacée par la V2 Vercel. Formulaire Brevo désactivé, trafic redirigé vers la V2.",
-    "createdAt": "2026-01-15T10:00:00.000Z",
-    "updatedAt": "2026-02-28T10:00:00.000Z"
-  },
-  {
     "id": 2,
     "nom": "Les Traversées – CAPS (Vercel)",
     "programmeId": 1,

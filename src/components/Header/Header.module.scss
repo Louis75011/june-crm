@@ -80,13 +80,56 @@ $white: #FFFFFF;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: linear-gradient(135deg, $june-orange, $june-pink);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.userPhoto {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid $june-orange;
+  box-shadow: 0 2px 8px rgba($june-orange, 0.25);
+}
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+  .header {
+    background: #161630;
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+
+  .greeting {
+    color: #e4e4ec;
+  }
+
+  .subtitle {
+    color: #8080a0;
+  }
+
+  .headerBtn {
+    border-color: rgba(255,255,255,0.1);
+    color: #c0c0d0;
+
+    &:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+    }
+  }
+
+  .userBadge {
+    border-left-color: rgba(255,255,255,0.08);
+  }
+
+  .userName {
+    color: #e4e4ec;
+  }
 }
 
 @media (max-width: 768px) {

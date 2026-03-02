@@ -127,10 +127,36 @@ label {
 // =====================
 // DARK MODE
 // =====================
-body.dark-mode {
-  background-color: #0f0f1a;
-  color: #e0e0e0;
 
+// CSS Custom Properties (light defaults)
+:root {
+  --bg-card: #fff;
+  --bg-subtle: #f9fafb;
+  --bg-hover: #f9fafb;
+  --bg-input: #fff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --color-primary: #e05d26;
+  --color-muted: #9ca3af;
+}
+
+body.dark-mode {
+  // Override CSS custom properties for var-based components (DataTable, EntityForm, EntityViewModal)
+  --bg-card: #1e1e3a;
+  --bg-subtle: #1a1a36;
+  --bg-hover: #252550;
+  --bg-input: #1a1a3a;
+  --text-primary: #e4e4ec;
+  --text-secondary: #a0a0b8;
+  --border-color: rgba(255,255,255,0.08);
+  --color-primary: #e05d26;
+  --color-muted: #7a7a94;
+
+  background-color: #0f0f1a;
+  color: #e4e4ec;
+
+  // ---- Layout ----
   .app-layout {
     background-color: #0f0f1a;
   }
@@ -144,60 +170,142 @@ body.dark-mode {
     background: #0f0f1a;
   }
 
+  // ---- Header ----
   header {
-    background: #161630;
-    border-color: rgba(255,255,255,0.06);
+    background: #161630 !important;
+    border-color: rgba(255,255,255,0.06) !important;
   }
 
+  // ---- Toolbar ----
   .toolbar {
     background: #161630;
     border-color: rgba(255,255,255,0.06);
   }
 
+  .toolbar__title {
+    color: #e4e4ec;
+  }
+
+  .toolbar__btn--outline {
+    color: #c0c0d0;
+    border-color: rgba(255,255,255,0.1);
+
+    &:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+    }
+  }
+
+  .toolbar__search input {
+    background: #1a1a3a;
+    border-color: rgba(255,255,255,0.08);
+    color: #e4e4ec;
+
+    &::placeholder { color: #7a7a94; }
+
+    &:focus {
+      border-color: $june-violet;
+      background: #1e1e40;
+    }
+  }
+
+  .toolbar__search-clear {
+    background: rgba(255,255,255,0.1);
+    color: #c0c0d0;
+
+    &:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+  }
+
+  // ---- Content area ----
+  .content-area {
+    background: #0f0f1a;
+  }
+
+  // ---- Tables (still needed for legacy) ----
   table {
-    background-color: #161630;
+    background-color: #1e1e3a;
 
     th {
-      background-color: #1a1a3a !important;
-      color: #e0e0e0;
+      background-color: #1a1a36 !important;
+      color: #e4e4ec;
       border-color: rgba(255,255,255,0.06);
     }
 
     td {
-      background-color: #161630;
-      color: #e0e0e0;
+      background-color: #1e1e3a;
+      color: #e4e4ec;
       border-color: rgba(255,255,255,0.04);
     }
 
     tr:hover td {
-      background-color: #1f1f48 !important;
+      background-color: #252550 !important;
     }
   }
 
+  // ---- Modals (global class) ----
   .modalContent {
-    background-color: #161630 !important;
-    color: #e0e0e0;
+    background-color: #1e1e3a !important;
+    color: #e4e4ec;
 
     h2, h3, h4 {
       color: $june-orange;
     }
   }
 
+  // ---- Inputs global ----
   input, textarea, select {
     background-color: #1a1a3a;
     border-color: rgba(255,255,255,0.08);
-    color: #e0e0e0;
+    color: #e4e4ec;
 
     &::placeholder {
-      color: #888;
+      color: #7a7a94;
     }
 
     &:focus {
       border-color: $june-violet;
+      box-shadow: 0 0 0 3px rgba($june-violet, 0.15);
     }
   }
 
   label {
     color: $june-pink;
+  }
+
+  // ---- Buttons (.btn) ----
+  .btn {
+    &-primary {
+      background-color: $june-orange;
+      &:hover {
+        background-color: color.adjust($june-orange, $lightness: -5%);
+      }
+    }
+
+    &-secondary {
+      background-color: $june-violet;
+      &:hover {
+        background-color: color.adjust($june-violet, $lightness: -5%);
+      }
+    }
+  }
+
+  // ---- Scrollbars ----
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f0f1a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(255,255,255,0.2);
+    }
   }
 }

@@ -1,19 +1,29 @@
 .formContainer {
-    max-width: 600px;
+    max-width: none;
     margin: 0 auto;
 }
 
 .title {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: var(--text-primary, #111827);
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+.field--full {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+    .form {
+        grid-template-columns: 1fr;
+    }
 }
 
 .field {
@@ -71,6 +81,7 @@ textarea.input {
 }
 
 .actions {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: flex-end;
     gap: 10px;

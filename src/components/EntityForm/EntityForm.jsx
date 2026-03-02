@@ -105,7 +105,7 @@ const EntityForm = ({ isOpen, onClose, onSubmit, fields, initialData, title, mod
                 </h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     {fields.map(field => (
-                        <div key={field.key} className={styles.field}>
+                        <div key={field.key} className={`${styles.field} ${field.type === 'textarea' ? styles['field--full'] : ''}`}>
                             <label className={styles.label}>
                                 {field.label}
                                 {field.required && <span className={styles.required}>*</span>}

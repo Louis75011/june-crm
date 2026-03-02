@@ -27,18 +27,18 @@ $red-crm: #960018;
 
 .modalContent {
   background-color: #FFFFFF;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
+  padding: 32px;
+  border-radius: 12px;
+  width: 92%;
+  max-width: 740px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
   animation: slideIn 0.3s ease;
 }
 
 .modalWide {
-  max-width: 900px;
+  max-width: 960px;
   width: 95%;
 }
 
@@ -190,6 +190,71 @@ $red-crm: #960018;
   justify-content: flex-end;
   padding-top: 15px;
   border-top: 1px solid #e0e0e0;
+}
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+  .modalContent {
+    background-color: #1e1e3a;
+    color: #e4e4ec;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .modalHeader {
+    border-bottom-color: $gold;
+
+    h2 {
+      color: #e05d26;
+    }
+  }
+
+  .closeBtn {
+    color: #a0a0b8;
+
+    &:hover {
+      color: $red-crm;
+    }
+  }
+
+  .formSection {
+    background: #1a1a36;
+    border-color: rgba(255,255,255,0.08);
+
+    legend {
+      color: #e05d26;
+    }
+  }
+
+  .formGroup {
+    label {
+      color: #c0c0d0;
+    }
+
+    input, select, textarea {
+      background: #1a1a3a;
+      border-color: rgba(255,255,255,0.08);
+      color: #e4e4ec;
+
+      &::placeholder { color: #7a7a94; }
+
+      &:focus {
+        border-color: $gold;
+        box-shadow: 0 0 0 2px rgba($gold, 0.2);
+      }
+    }
+  }
+
+  .checkboxLabel {
+    color: #c0c0d0;
+
+    &:hover {
+      color: #e4e4ec;
+    }
+  }
+
+  .modalButtons {
+    border-top-color: rgba(255,255,255,0.08);
+  }
 }
 
 @media (max-width: 768px) {

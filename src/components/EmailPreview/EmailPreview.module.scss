@@ -269,3 +269,95 @@ $june-dark: #1a1a2e;
         }
     }
 }
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+    .previewContainer {
+        background: #161630;
+        border-color: rgba(255,255,255,0.08);
+    }
+
+    .previewHeader {
+        background: #1e1e3a;
+        border-bottom-color: rgba(255,255,255,0.08);
+
+        h3 {
+            color: #e4e4ec;
+        }
+    }
+
+    .closeBtn {
+        background: rgba(255,255,255,0.06);
+        color: #a0a0b8;
+
+        &:hover {
+            background: rgba(255,255,255,0.12);
+            color: #e4e4ec;
+        }
+    }
+
+    .emailFrame {
+        background: #1a1a36;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .emailBody {
+        color: #e4e4ec;
+    }
+
+    .intro {
+        color: #a0a0b8;
+    }
+
+    .contactCard {
+        border-color: rgba(255,255,255,0.08);
+    }
+
+    .contactCardHeader {
+        background: #1a1a36;
+        color: #e4e4ec;
+        border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .detailRow {
+        border-bottom-color: rgba(255,255,255,0.04);
+    }
+
+    .detailLabel {
+        color: #a0a0b8;
+    }
+
+    .detailValue {
+        color: #e4e4ec;
+    }
+
+    .messageBlock {
+        background: #1a1a36;
+        border-color: rgba(255,255,255,0.08);
+    }
+
+    .messageLabel {
+        color: #a0a0b8;
+    }
+
+    .messageContent {
+        color: #e4e4ec;
+    }
+
+    .dateInfo {
+        color: #7a7a94;
+    }
+
+    .emailFooter {
+        background: #1a1a36;
+        border-top-color: rgba(255,255,255,0.08);
+
+        p {
+            color: #7a7a94;
+
+            strong {
+                color: #a0a0b8;
+            }
+        }
+    }
+}

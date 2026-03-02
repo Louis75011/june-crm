@@ -1,19 +1,25 @@
 .container {
-    max-width: 640px;
+    max-width: none;
     margin: 0 auto;
 }
 
 .title {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: var(--text-primary, #111827);
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 18px 28px;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .field {

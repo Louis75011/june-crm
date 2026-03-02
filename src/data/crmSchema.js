@@ -208,8 +208,8 @@ export const landingpageViewFields = [
     { key: 'notes', label: 'Notes' }
 ];
 
-// ==================== PROSPECTS ====================
-export const prospectColumns = [
+// ==================== LEADS ====================
+export const leadColumns = [
     { key: 'nomComplet', label: 'Nom', width: '150px' },
     { key: 'email', label: 'Email' },
     { key: 'telephone', label: 'Téléphone' },
@@ -217,7 +217,7 @@ export const prospectColumns = [
     { key: 'utmSource', label: 'Source' },
     { key: 'dateSoumission', label: 'Date', type: 'date' },
     {
-        key: 'statutProspect', label: 'Statut', type: 'badge', colorMap: {
+        key: 'statutLead', label: 'Statut', type: 'badge', colorMap: {
             'Nouveau': '#3b82f6', 'À contacter': '#f59e0b', 'Contacté': '#8b5cf6',
             'RDV': '#10b981', 'Converti': '#059669'
         }
@@ -230,7 +230,7 @@ export const prospectColumns = [
     { key: 'transmisClient', label: 'Transmis', type: 'boolean' }
 ];
 
-export const prospectFormFields = [
+export const leadFormFields = [
     { key: 'nomComplet', label: 'Nom complet', type: 'text', required: true },
     { key: 'prenom', label: 'Prénom', type: 'text' },
     { key: 'email', label: 'Email', type: 'email', required: true },
@@ -244,7 +244,7 @@ export const prospectFormFields = [
     { key: 'utmMedium', label: 'utm_medium', type: 'text' },
     { key: 'utmCampaign', label: 'utm_campaign', type: 'text' },
     { key: 'utmContent', label: 'utm_content', type: 'text' },
-    { key: 'statutProspect', label: 'Statut prospect', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
+    { key: 'statutLead', label: 'Statut lead', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
     { key: 'priorite', label: 'Priorité', type: 'select', options: ['Haute', 'Moyenne', 'Faible'] },
     { key: 'transmisClient', label: 'Transmis au client', type: 'checkbox' },
     { key: 'dateTransmissionClient', label: 'Date transmission client', type: 'date' },
@@ -252,7 +252,7 @@ export const prospectFormFields = [
     { key: 'notes', label: 'Notes', type: 'textarea' }
 ];
 
-export const prospectViewFields = [
+export const leadViewFields = [
     { key: 'nomComplet', label: 'Nom complet' },
     { key: 'prenom', label: 'Prénom' },
     { key: 'email', label: 'Email' },
@@ -264,7 +264,7 @@ export const prospectViewFields = [
     { key: 'utmMedium', label: 'utm_medium' },
     { key: 'utmCampaign', label: 'utm_campaign' },
     { key: 'dateSoumission', label: 'Date soumission', type: 'date' },
-    { key: 'statutProspect', label: 'Statut prospect' },
+    { key: 'statutLead', label: 'Statut lead' },
     { key: 'priorite', label: 'Priorité' },
     { key: 'transmisClient', label: 'Transmis au client', type: 'boolean' },
     { key: 'dateTransmissionClient', label: 'Date transmission', type: 'date' },
@@ -321,9 +321,9 @@ export const statistiqueColumns = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions LP' },
-    { key: 'prospectsGeneres', label: 'Prospects' },
+    { key: 'leadsGeneres', label: 'Leads' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'prospectsConvertis', label: 'Convertis' },
+    { key: 'leadsConvertis', label: 'Convertis' },
     {
         key: 'sourceDonnees', label: 'Source', type: 'badge', colorMap: {
             'GA4': '#3b82f6', 'Meta': '#8b5cf6', 'Google Ads': '#10b981', 'Manuel': '#6b7280'
@@ -337,10 +337,10 @@ export const statistiqueFormFields = [
     { key: 'impressions', label: 'Impressions', type: 'number' },
     { key: 'clics', label: 'Clics', type: 'number' },
     { key: 'sessionsLanding', label: 'Sessions landing', type: 'number' },
-    { key: 'prospectsGeneres', label: 'Prospects générés', type: 'number' },
+    { key: 'leadsGeneres', label: 'Leads générés', type: 'number' },
     { key: 'coutTotal', label: 'Coût total (€)', type: 'currency' },
-    { key: 'prospectsTransmisClient', label: 'Prospects transmis client', type: 'number' },
-    { key: 'prospectsConvertis', label: 'Prospects convertis', type: 'number' },
+    { key: 'leadsTransmisClient', label: 'Leads transmis client', type: 'number' },
+    { key: 'leadsConvertis', label: 'Leads convertis', type: 'number' },
     { key: 'sourceDonnees', label: 'Source de données', type: 'select', options: ['GA4', 'Meta', 'Google Ads', 'Manuel'] },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];
@@ -351,10 +351,10 @@ export const statistiqueViewFields = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions landing' },
-    { key: 'prospectsGeneres', label: 'Prospects générés' },
+    { key: 'leadsGeneres', label: 'Leads générés' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'prospectsTransmisClient', label: 'Prospects transmis client' },
-    { key: 'prospectsConvertis', label: 'Prospects convertis' },
+    { key: 'leadsTransmisClient', label: 'Leads transmis client' },
+    { key: 'leadsConvertis', label: 'Leads convertis' },
     { key: 'sourceDonnees', label: 'Source' },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];

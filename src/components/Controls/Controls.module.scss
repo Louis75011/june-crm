@@ -254,3 +254,84 @@ $border-gray: #CCCCCC;
     min-width: 100%;
   }
 }
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+  .searchBox input {
+    background: #1a1a3a;
+    border-color: rgba(255,255,255,0.1);
+    color: #e4e4ec;
+
+    &::placeholder { color: #7a7a94; }
+
+    &:focus {
+      border-color: $gold;
+      box-shadow: 0 0 8px rgba(197, 166, 102, 0.25);
+      background: #1e1e40;
+    }
+  }
+
+  .clearBtn {
+    background: rgba(255,255,255,0.1);
+    color: #c0c0d0;
+
+    &:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+  }
+
+  .searchHelpBtn {
+    border-color: $blue-sky;
+    background: #1a1a3a;
+    color: $blue-sky;
+
+    &:hover {
+      background: $blue-sky;
+      color: white;
+    }
+  }
+
+  .searchHelpTooltip {
+    background: #1e1e3a;
+    border-color: $blue-sky;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+
+    h4 {
+      color: #e05d26;
+      border-bottom-color: $gold;
+    }
+  }
+
+  .closeHelp {
+    color: #a0a0b8;
+
+    &:hover {
+      background: rgba(255,255,255,0.06);
+      color: #e4e4ec;
+    }
+  }
+
+  .helpSection {
+    background: #1a1a36;
+    border-left-color: $gold;
+
+    strong {
+      color: #e05d26;
+    }
+
+    p {
+      color: #a0a0b8;
+    }
+
+    code {
+      background: #252550;
+      color: $blue-sky;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    small {
+      color: #7a7a94;
+    }
+  }
+}

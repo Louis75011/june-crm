@@ -92,6 +92,31 @@ $red-crm: #960018;
   border-top: 1px solid #e0e0e0;
 }
 
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+  .modalContent {
+    background-color: #1e1e3a;
+    color: #e4e4ec;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  }
+
+  .closeBtn {
+    color: #a0a0b8;
+
+    &:hover {
+      color: $red-crm;
+    }
+  }
+
+  .message {
+    color: #c0c0d0;
+  }
+
+  .modalButtons {
+    border-top-color: rgba(255,255,255,0.08);
+  }
+}
+
 @media (max-width: 480px) {
   .modalContent {
     width: 95%;

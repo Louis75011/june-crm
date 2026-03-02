@@ -115,3 +115,52 @@ $gold: #C5A666;
     padding-top: 16px;
     border-top: 1px solid #e0e0e0;
 }
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+    .settingGroup h4 {
+        color: #e05d26;
+        border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .settingRow label {
+        color: #c0c0d0;
+    }
+
+    .inputRow input[type="range"] {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .rangeValue {
+        color: #e4e4ec;
+        background: #1a1a36;
+    }
+
+    .hint {
+        color: #7a7a94;
+    }
+
+    .toggleBtn {
+        border-color: rgba(255,255,255,0.1);
+        background: #1a1a36;
+
+        &:hover {
+            border-color: $gold;
+            background: #252550;
+        }
+
+        &.active {
+            border-color: $gold;
+            background: $gold;
+            color: white;
+        }
+    }
+
+    .toggleText {
+        color: #c0c0d0;
+    }
+
+    .modalButtons {
+        border-top-color: rgba(255,255,255,0.08);
+    }
+}

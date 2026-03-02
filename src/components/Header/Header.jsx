@@ -1,5 +1,10 @@
 import styles from './Header.module.scss';
 
+let alexiaPhoto;
+try {
+    alexiaPhoto = new URL('../../assets/alexia-bc.jpg', import.meta.url).href;
+} catch { alexiaPhoto = null; }
+
 const Header = ({ adminUser, onSettingsClick, onInfoClick }) => {
     return (
         <header className={styles.header}>
@@ -24,7 +29,11 @@ const Header = ({ adminUser, onSettingsClick, onInfoClick }) => {
                     {adminUser && (
                         <div className={styles.userBadge}>
                             <span className={styles.userName}>{adminUser.name}</span>
-                            <span className={styles.userAvatar}>{adminUser.initials}</span>
+                            {alexiaPhoto ? (
+                                <img src={alexiaPhoto} alt={adminUser.name} className={styles.userPhoto} />
+                            ) : (
+                                <span className={styles.userAvatar}>{adminUser.initials}</span>
+                            )}
                         </div>
                     )}
                 </div>

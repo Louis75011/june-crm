@@ -45,3 +45,30 @@ $border-gray: #CCCCCC;
     display: block;
   }
 }
+
+// ===== DARK MODE =====
+:global(body.dark-mode) {
+  .tabContainer {
+    background-color: #1e1e3a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .tabs {
+    border-bottom-color: rgba(255,255,255,0.08);
+    background-color: #1a1a36;
+  }
+
+  .tab {
+    background-color: #1a1a36;
+    color: #c0c0d0;
+
+    &:hover:not(.active) {
+      background-color: #252550;
+    }
+
+    &.active {
+      background-color: $gold;
+      color: #FFFFFF;
+    }
+  }
+}

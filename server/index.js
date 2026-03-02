@@ -11,14 +11,14 @@ app.use(cors());
 app.use(express.json({ limit: '5mb' }));
 
 // ==================== ROUTES API — June Lab CRM ====================
-app.use('/api/clients',       createCrudRouter('clients.json', 'client'));
-app.use('/api/programmes',    createCrudRouter('programmes.json', 'programme'));
-app.use('/api/campagnes',     createCrudRouter('campagnes.json', 'campagne'));
-app.use('/api/landingpages',  createCrudRouter('landingpages.json', 'landing page'));
-app.use('/api/leads',         createCrudRouter('leads.json', 'lead'));
-app.use('/api/templates',     createCrudRouter('templates.json', 'template'));
-app.use('/api/statistiques',  createCrudRouter('statistiques.json', 'statistique'));
-app.use('/api/settings',      settingsRouter);
+app.use('/api/clients', createCrudRouter('clients.json', 'client'));
+app.use('/api/programmes', createCrudRouter('programmes.json', 'programme'));
+app.use('/api/campagnes', createCrudRouter('campagnes.json', 'campagne'));
+app.use('/api/landingpages', createCrudRouter('landingpages.json', 'landing page'));
+app.use('/api/leads', createCrudRouter('leads.json', 'lead'));
+app.use('/api/templates', createCrudRouter('templates.json', 'template'));
+app.use('/api/statistiques', createCrudRouter('statistiques.json', 'statistique'));
+app.use('/api/settings', settingsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

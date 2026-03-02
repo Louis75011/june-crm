@@ -6,16 +6,20 @@
 // ==================== CLIENTS ====================
 export const clientColumns = [
     { key: 'nom', label: 'Nom du client', width: '180px' },
-    { key: 'type', label: 'Type', type: 'badge', colorMap: {
-        'Promoteur': '#3b82f6', 'Coopérative': '#8b5cf6', 'Bailleur social': '#10b981',
-        'Aménageur': '#f59e0b', 'Autre': '#6b7280'
-    }},
+    {
+        key: 'type', label: 'Type', type: 'badge', colorMap: {
+            'Promoteur': '#3b82f6', 'Coopérative': '#8b5cf6', 'Bailleur social': '#10b981',
+            'Aménageur': '#f59e0b', 'Autre': '#6b7280'
+        }
+    },
     { key: 'contactPrincipal', label: 'Contact principal' },
     { key: 'emailContact', label: 'Email' },
     { key: 'ville', label: 'Ville' },
-    { key: 'statut', label: 'Statut', type: 'badge', colorMap: {
-        'Actif': '#10b981', 'Inactif': '#6b7280', 'Prospect': '#f59e0b'
-    }}
+    {
+        key: 'statut', label: 'Statut', type: 'badge', colorMap: {
+            'Actif': '#10b981', 'Inactif': '#6b7280', 'Prospect': '#f59e0b'
+        }
+    }
 ];
 
 export const clientFormFields = [
@@ -48,15 +52,19 @@ export const clientViewFields = [
 export const programmeColumns = [
     { key: 'nom', label: 'Programme', width: '180px' },
     { key: 'ville', label: 'Ville' },
-    { key: 'typeProgramme', label: 'Type', type: 'badge', colorMap: {
-        'Neuf': '#3b82f6', 'BRS': '#8b5cf6', 'Rénovation': '#f59e0b', 'Mixte': '#10b981', 'Autre': '#6b7280'
-    }},
+    {
+        key: 'typeProgramme', label: 'Type', type: 'badge', colorMap: {
+            'Neuf': '#3b82f6', 'BRS': '#8b5cf6', 'Rénovation': '#f59e0b', 'Mixte': '#10b981', 'Autre': '#6b7280'
+        }
+    },
     { key: 'nombreLots', label: 'Lots' },
     { key: 'prixAPartirDe', label: 'Prix min', type: 'currency' },
-    { key: 'statut', label: 'Statut', type: 'badge', colorMap: {
-        'En préparation': '#f59e0b', 'Commercialisation': '#10b981',
-        'En cours de construction': '#3b82f6', 'Livré': '#6b7280'
-    }}
+    {
+        key: 'statut', label: 'Statut', type: 'badge', colorMap: {
+            'En préparation': '#f59e0b', 'Commercialisation': '#10b981',
+            'En cours de construction': '#3b82f6', 'Livré': '#6b7280'
+        }
+    }
 ];
 
 export const programmeFormFields = [
@@ -92,17 +100,23 @@ export const programmeViewFields = [
 // ==================== CAMPAGNES ====================
 export const campagneColumns = [
     { key: 'nom', label: 'Campagne', width: '200px' },
-    { key: 'typeCampagne', label: 'Type', type: 'badge', colorMap: {
-        'Lancement': '#3b82f6', 'Relance': '#f59e0b', 'Événement': '#8b5cf6'
-    }},
-    { key: 'canalSource', label: 'Canal', type: 'badge', colorMap: {
-        'Meta Ads': '#3b82f6', 'Google Ads': '#10b981', 'Newsletter': '#f59e0b'
-    }},
+    {
+        key: 'typeCampagne', label: 'Type', type: 'badge', colorMap: {
+            'Lancement': '#3b82f6', 'Relance': '#f59e0b', 'Événement': '#8b5cf6'
+        }
+    },
+    {
+        key: 'canalSource', label: 'Canal', type: 'badge', colorMap: {
+            'Meta Ads': '#3b82f6', 'Google Ads': '#10b981', 'Newsletter': '#f59e0b'
+        }
+    },
     { key: 'budget', label: 'Budget', type: 'currency' },
-    { key: 'statut', label: 'Statut', type: 'badge', colorMap: {
-        'Brouillon': '#6b7280', 'Active': '#10b981', 'En pause': '#f59e0b',
-        'Terminée': '#3b82f6', 'Annulée': '#ef4444'
-    }},
+    {
+        key: 'statut', label: 'Statut', type: 'badge', colorMap: {
+            'Brouillon': '#6b7280', 'Active': '#10b981', 'En pause': '#f59e0b',
+            'Terminée': '#3b82f6', 'Annulée': '#ef4444'
+        }
+    },
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' }
 ];
@@ -149,10 +163,12 @@ export const landingpageColumns = [
     { key: 'nom', label: 'Landing page', width: '200px' },
     { key: 'url', label: 'URL', type: 'url' },
     { key: 'typePage', label: 'Type' },
-    { key: 'statut', label: 'Statut', type: 'badge', colorMap: {
-        'Maquette': '#6b7280', 'Dev': '#f59e0b', 'Préprod': '#3b82f6',
-        'Live': '#10b981', 'Archivée': '#9ca3af'
-    }},
+    {
+        key: 'statut', label: 'Statut', type: 'badge', colorMap: {
+            'Maquette': '#6b7280', 'Dev': '#f59e0b', 'Préprod': '#3b82f6',
+            'Live': '#10b981', 'Archivée': '#9ca3af'
+        }
+    },
     { key: 'sessions', label: 'Sessions' },
     { key: 'formulaireActif', label: 'Form.', type: 'boolean' }
 ];
@@ -199,13 +215,17 @@ export const leadColumns = [
     { key: 'typologieRecherchee', label: 'Typo' },
     { key: 'utmSource', label: 'Source' },
     { key: 'dateSoumission', label: 'Date', type: 'date' },
-    { key: 'statutLead', label: 'Statut', type: 'badge', colorMap: {
-        'Nouveau': '#3b82f6', 'À contacter': '#f59e0b', 'Contacté': '#8b5cf6',
-        'RDV': '#10b981', 'Converti': '#059669'
-    }},
-    { key: 'priorite', label: 'Priorité', type: 'badge', colorMap: {
-        'Haute': '#ef4444', 'Moyenne': '#f59e0b', 'Faible': '#6b7280'
-    }},
+    {
+        key: 'statutLead', label: 'Statut', type: 'badge', colorMap: {
+            'Nouveau': '#3b82f6', 'À contacter': '#f59e0b', 'Contacté': '#8b5cf6',
+            'RDV': '#10b981', 'Converti': '#059669'
+        }
+    },
+    {
+        key: 'priorite', label: 'Priorité', type: 'badge', colorMap: {
+            'Haute': '#ef4444', 'Moyenne': '#f59e0b', 'Faible': '#6b7280'
+        }
+    },
     { key: 'transmisClient', label: 'Transmis', type: 'boolean' }
 ];
 
@@ -254,12 +274,16 @@ export const leadViewFields = [
 // ==================== TEMPLATES EMAIL ====================
 export const templateColumns = [
     { key: 'nom', label: 'Template', width: '200px' },
-    { key: 'typeTemplate', label: 'Type', type: 'badge', colorMap: {
-        'Confirmation': '#3b82f6', 'Relance': '#f59e0b', 'Newsletter': '#8b5cf6'
-    }},
-    { key: 'statut', label: 'Statut', type: 'badge', colorMap: {
-        'Brouillon': '#6b7280', 'En validation': '#f59e0b', 'Validé': '#10b981', 'Livré': '#3b82f6'
-    }},
+    {
+        key: 'typeTemplate', label: 'Type', type: 'badge', colorMap: {
+            'Confirmation': '#3b82f6', 'Relance': '#f59e0b', 'Newsletter': '#8b5cf6'
+        }
+    },
+    {
+        key: 'statut', label: 'Statut', type: 'badge', colorMap: {
+            'Brouillon': '#6b7280', 'En validation': '#f59e0b', 'Validé': '#10b981', 'Livré': '#3b82f6'
+        }
+    },
     { key: 'espCible', label: 'ESP' },
     { key: 'compatibleMobile', label: 'Mobile', type: 'boolean' },
     { key: 'testeLitmus', label: 'Litmus', type: 'boolean' }
@@ -299,9 +323,11 @@ export const statistiqueColumns = [
     { key: 'leadsGeneres', label: 'Leads' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
     { key: 'leadsConvertis', label: 'Convertis' },
-    { key: 'sourceDonnees', label: 'Source', type: 'badge', colorMap: {
-        'GA4': '#3b82f6', 'Meta': '#8b5cf6', 'Google Ads': '#10b981', 'Manuel': '#6b7280'
-    }}
+    {
+        key: 'sourceDonnees', label: 'Source', type: 'badge', colorMap: {
+            'GA4': '#3b82f6', 'Meta': '#8b5cf6', 'Google Ads': '#10b981', 'Manuel': '#6b7280'
+        }
+    }
 ];
 
 export const statistiqueFormFields = [

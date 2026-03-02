@@ -45,13 +45,13 @@ function createEntityAPI(basePath) {
 
 // ==================== ENTITÉS June Lab CRM ====================
 
-export const clientsAPI       = createEntityAPI('/clients');
-export const programmesAPI    = createEntityAPI('/programmes');
-export const campagnesAPI     = createEntityAPI('/campagnes');
-export const landingpagesAPI  = createEntityAPI('/landingpages');
-export const leadsAPI         = createEntityAPI('/leads');
-export const templatesAPI     = createEntityAPI('/templates');
-export const statistiquesAPI  = createEntityAPI('/statistiques');
+export const clientsAPI = createEntityAPI('/clients');
+export const programmesAPI = createEntityAPI('/programmes');
+export const campagnesAPI = createEntityAPI('/campagnes');
+export const landingpagesAPI = createEntityAPI('/landingpages');
+export const leadsAPI = createEntityAPI('/leads');
+export const templatesAPI = createEntityAPI('/templates');
+export const statistiquesAPI = createEntityAPI('/statistiques');
 
 // ==================== SETTINGS ====================
 

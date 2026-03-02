@@ -44,24 +44,24 @@ const API_MAP = {
 
 // Map colonnes/champs par clé d'onglet
 const SCHEMA_MAP = {
-  clients:       { columns: clientColumns, formFields: clientFormFields, viewFields: clientViewFields },
-  programmes:    { columns: programmeColumns, formFields: programmeFormFields, viewFields: programmeViewFields },
-  campagnes:     { columns: campagneColumns, formFields: campagneFormFields, viewFields: campagneViewFields },
-  landingpages:  { columns: landingpageColumns, formFields: landingpageFormFields, viewFields: landingpageViewFields },
-  leads:         { columns: leadColumns, formFields: leadFormFields, viewFields: leadViewFields },
-  templates:     { columns: templateColumns, formFields: templateFormFields, viewFields: templateViewFields },
-  statistiques:  { columns: statistiqueColumns, formFields: statistiqueFormFields, viewFields: statistiqueViewFields }
+  clients: { columns: clientColumns, formFields: clientFormFields, viewFields: clientViewFields },
+  programmes: { columns: programmeColumns, formFields: programmeFormFields, viewFields: programmeViewFields },
+  campagnes: { columns: campagneColumns, formFields: campagneFormFields, viewFields: campagneViewFields },
+  landingpages: { columns: landingpageColumns, formFields: landingpageFormFields, viewFields: landingpageViewFields },
+  leads: { columns: leadColumns, formFields: leadFormFields, viewFields: leadViewFields },
+  templates: { columns: templateColumns, formFields: templateFormFields, viewFields: templateViewFields },
+  statistiques: { columns: statistiqueColumns, formFields: statistiqueFormFields, viewFields: statistiqueViewFields }
 };
 
 function App() {
   // Hooks entités
-  const clients       = useEntity(clientsAPI, 'client');
-  const programmes    = useEntity(programmesAPI, 'programme');
-  const campagnes     = useEntity(campagnesAPI, 'campagne');
-  const landingpages  = useEntity(landingpagesAPI, 'landing page');
-  const leads         = useEntity(leadsAPI, 'lead');
-  const templates     = useEntity(templatesAPI, 'template');
-  const statistiques  = useEntity(statistiquesAPI, 'statistique');
+  const clients = useEntity(clientsAPI, 'client');
+  const programmes = useEntity(programmesAPI, 'programme');
+  const campagnes = useEntity(campagnesAPI, 'campagne');
+  const landingpages = useEntity(landingpagesAPI, 'landing page');
+  const leads = useEntity(leadsAPI, 'lead');
+  const templates = useEntity(templatesAPI, 'template');
+  const statistiques = useEntity(statistiquesAPI, 'statistique');
 
   const ENTITY_MAP = useMemo(() => ({
     clients, programmes, campagnes, landingpages, leads, templates, statistiques
@@ -192,7 +192,7 @@ function App() {
         />
       )
     })),
-  [ENTITY_MAP, searchFilter, settings.maxChars, handleEdit, handleDelete, handleView]);
+    [ENTITY_MAP, searchFilter, settings.maxChars, handleEdit, handleDelete, handleView]);
 
   return (
     <div className="container">

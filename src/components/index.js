@@ -7,3 +7,4 @@ export { default as ConfirmModal } from './ConfirmModal/ConfirmModal';
 export { default as Notification } from './Notification/Notification';
 export { default as SettingsModal } from './SettingsModal/SettingsModal';
 export { default as InfoModal } from './InfoModal/InfoModal';
+export { default as EmailPreview } from './EmailPreview/EmailPreview';

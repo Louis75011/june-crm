@@ -110,3 +110,35 @@
     color: var(--text-secondary, #9ca3af);
     font-size: 1rem;
 }
+
+.sortableTh {
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+
+    &:hover {
+        background: var(--bg-hover, #f3f4f6);
+    }
+}
+
+.thContent {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sortIcon {
+    font-size: 0.6rem;
+    opacity: 0.3;
+    transition: opacity 0.15s;
+
+    .sortableTh:hover & {
+        opacity: 0.6;
+    }
+}
+
+.sortIconActive {
+    font-size: 0.6rem;
+    color: var(--color-primary, #e05d26);
+    opacity: 1;
+}

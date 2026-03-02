@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react';
 import styles from './DataTable.module.scss';
 
 // Map des clés de lookup : champ ID → entité de lookup
@@ -13,8 +14,27 @@ const LOOKUP_KEY_MAP = {
 /**
  * Composant tableau générique pour les entités June Lab CRM
  * Supporte les lookups/relations pour résoudre les IDs en noms lisibles
+ * Supporte le tri ascendant/descendant par colonne
  */
 const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxChars = 80, lookupMaps = {} }) => {
+    const [sortKey, setSortKey] = useState(null);
+    const [sortDirection, setSortDirection] = useState('asc'); // 'asc' | 'desc'
+
+    const handleSort = (colKey) => {
+        if (sortKey === colKey) {
+            if (sortDirection === 'asc') {
+                setSortDirection('desc');
+            } else {
+                // Third click → reset sort
+                setSortKey(null);
+                setSortDirection('asc');
+            }
+        } else {
+            setSortKey(colKey);
+            setSortDirection('asc');
+        }
+    };
+
     const filteredData = searchFilter
         ? data.filter(item =>
             Object.values(item).some(val =>
@@ -22,6 +42,44 @@ const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxC
             )
         )
         : data;
+
+    const sortedData = useMemo(() => {
+        if (!sortKey) return filteredData;
+        return [...filteredData].sort((a, b) => {
+            let valA = a[sortKey];
+            let valB = b[sortKey];
+
+            // Resolve lookups for sorting
+            const lookupEntity = LOOKUP_KEY_MAP[sortKey];
+            if (lookupEntity && lookupMaps[lookupEntity]) {
+                valA = lookupMaps[lookupEntity][valA] || valA;
+                valB = lookupMaps[lookupEntity][valB] || valB;
+            }
+
+            // Handle nulls
+            if (valA == null && valB == null) return 0;
+            if (valA == null) return 1;
+            if (valB == null) return -1;
+
+            // Numeric sort
+            if (typeof valA === 'number' && typeof valB === 'number') {
+                return sortDirection === 'asc' ? valA - valB : valB - valA;
+            }
+
+            // Boolean sort
+            if (typeof valA === 'boolean') {
+                return sortDirection === 'asc'
+                    ? (valA === valB ? 0 : valA ? -1 : 1)
+                    : (valA === valB ? 0 : valA ? 1 : -1);
+            }
+
+            // String sort
+            const strA = String(valA).toLowerCase();
+            const strB = String(valB).toLowerCase();
+            const cmp = strA.localeCompare(strB, 'fr');
+            return sortDirection === 'asc' ? cmp : -cmp;
+        });
+    }, [filteredData, sortKey, sortDirection, lookupMaps]);
 
     const truncate = (text, max = maxChars) => {
         if (!text) return '—';
@@ -75,7 +133,7 @@ const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxC
         return truncate(value);
     };
 
-    if (filteredData.length === 0) {
+    if (sortedData.length === 0) {
         return (
             <div className={styles.empty}>
                 <p>🔍 Aucun résultat{searchFilter ? ` pour "${searchFilter}"` : ''}</p>
@@ -83,24 +141,38 @@ const DataTable = ({ columns, data, searchFilter, onEdit, onDelete, onView, maxC
         );
     }
 
+    const renderSortIndicator = (colKey) => {
+        if (sortKey !== colKey) return <span className={styles.sortIcon}>⇅</span>;
+        return <span className={styles.sortIconActive}>{sortDirection === 'asc' ? '▲' : '▼'}</span>;
+    };
+
     return (
         <div className={styles.tableWrapper}>
             <div className={styles.tableInfo}>
-                <span>{filteredData.length} élément{filteredData.length > 1 ? 's' : ''}</span>
+                <span>{sortedData.length} élément{sortedData.length > 1 ? 's' : ''}</span>
             </div>
             <table className={styles.table}>
                 <thead>
                     <tr>
                         {columns.map(col => (
-                            <th key={col.key} style={col.width ? { width: col.width } : {}}>
-                                {col.label}
+                            <th
+                                key={col.key}
+                                style={col.width ? { width: col.width } : {}}
+                                className={styles.sortableTh}
+                                onClick={() => handleSort(col.key)}
+                                title={`Trier par ${col.label}`}
+                            >
+                                <span className={styles.thContent}>
+                                    {col.label}
+                                    {renderSortIndicator(col.key)}
+                                </span>
                             </th>
                         ))}
                         <th className={styles.actionsCol}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredData.map(item => (
+                    {sortedData.map(item => (
                         <tr key={item.id}>
                             {columns.map(col => (
                                 <td key={col.key}>{renderCell(item, col)}</td>

@@ -14,6 +14,7 @@ export const clientColumns = [
     },
     { key: 'contactPrincipal', label: 'Contact principal' },
     { key: 'emailContact', label: 'Email' },
+    { key: 'telephoneContact', label: 'Téléphone' },
     { key: 'ville', label: 'Ville' },
     {
         key: 'statut', label: 'Statut', type: 'badge', colorMap: {
@@ -207,8 +208,8 @@ export const landingpageViewFields = [
     { key: 'notes', label: 'Notes' }
 ];
 
-// ==================== LEADS ====================
-export const leadColumns = [
+// ==================== PROSPECTS ====================
+export const prospectColumns = [
     { key: 'nomComplet', label: 'Nom', width: '150px' },
     { key: 'email', label: 'Email' },
     { key: 'telephone', label: 'Téléphone' },
@@ -216,7 +217,7 @@ export const leadColumns = [
     { key: 'utmSource', label: 'Source' },
     { key: 'dateSoumission', label: 'Date', type: 'date' },
     {
-        key: 'statutLead', label: 'Statut', type: 'badge', colorMap: {
+        key: 'statutProspect', label: 'Statut', type: 'badge', colorMap: {
             'Nouveau': '#3b82f6', 'À contacter': '#f59e0b', 'Contacté': '#8b5cf6',
             'RDV': '#10b981', 'Converti': '#059669'
         }
@@ -229,7 +230,7 @@ export const leadColumns = [
     { key: 'transmisClient', label: 'Transmis', type: 'boolean' }
 ];
 
-export const leadFormFields = [
+export const prospectFormFields = [
     { key: 'nomComplet', label: 'Nom complet', type: 'text', required: true },
     { key: 'prenom', label: 'Prénom', type: 'text' },
     { key: 'email', label: 'Email', type: 'email', required: true },
@@ -243,7 +244,7 @@ export const leadFormFields = [
     { key: 'utmMedium', label: 'utm_medium', type: 'text' },
     { key: 'utmCampaign', label: 'utm_campaign', type: 'text' },
     { key: 'utmContent', label: 'utm_content', type: 'text' },
-    { key: 'statutLead', label: 'Statut lead', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
+    { key: 'statutProspect', label: 'Statut prospect', type: 'select', options: ['Nouveau', 'À contacter', 'Contacté', 'RDV', 'Converti'] },
     { key: 'priorite', label: 'Priorité', type: 'select', options: ['Haute', 'Moyenne', 'Faible'] },
     { key: 'transmisClient', label: 'Transmis au client', type: 'checkbox' },
     { key: 'dateTransmissionClient', label: 'Date transmission client', type: 'date' },
@@ -251,7 +252,7 @@ export const leadFormFields = [
     { key: 'notes', label: 'Notes', type: 'textarea' }
 ];
 
-export const leadViewFields = [
+export const prospectViewFields = [
     { key: 'nomComplet', label: 'Nom complet' },
     { key: 'prenom', label: 'Prénom' },
     { key: 'email', label: 'Email' },
@@ -263,7 +264,7 @@ export const leadViewFields = [
     { key: 'utmMedium', label: 'utm_medium' },
     { key: 'utmCampaign', label: 'utm_campaign' },
     { key: 'dateSoumission', label: 'Date soumission', type: 'date' },
-    { key: 'statutLead', label: 'Statut lead' },
+    { key: 'statutProspect', label: 'Statut prospect' },
     { key: 'priorite', label: 'Priorité' },
     { key: 'transmisClient', label: 'Transmis au client', type: 'boolean' },
     { key: 'dateTransmissionClient', label: 'Date transmission', type: 'date' },
@@ -320,9 +321,9 @@ export const statistiqueColumns = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions LP' },
-    { key: 'leadsGeneres', label: 'Leads' },
+    { key: 'prospectsGeneres', label: 'Prospects' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'leadsConvertis', label: 'Convertis' },
+    { key: 'prospectsConvertis', label: 'Convertis' },
     {
         key: 'sourceDonnees', label: 'Source', type: 'badge', colorMap: {
             'GA4': '#3b82f6', 'Meta': '#8b5cf6', 'Google Ads': '#10b981', 'Manuel': '#6b7280'
@@ -336,10 +337,10 @@ export const statistiqueFormFields = [
     { key: 'impressions', label: 'Impressions', type: 'number' },
     { key: 'clics', label: 'Clics', type: 'number' },
     { key: 'sessionsLanding', label: 'Sessions landing', type: 'number' },
-    { key: 'leadsGeneres', label: 'Leads générés', type: 'number' },
+    { key: 'prospectsGeneres', label: 'Prospects générés', type: 'number' },
     { key: 'coutTotal', label: 'Coût total (€)', type: 'currency' },
-    { key: 'leadsTransmisClient', label: 'Leads transmis client', type: 'number' },
-    { key: 'leadsConvertis', label: 'Leads convertis', type: 'number' },
+    { key: 'prospectsTransmisClient', label: 'Prospects transmis client', type: 'number' },
+    { key: 'prospectsConvertis', label: 'Prospects convertis', type: 'number' },
     { key: 'sourceDonnees', label: 'Source de données', type: 'select', options: ['GA4', 'Meta', 'Google Ads', 'Manuel'] },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];
@@ -350,10 +351,10 @@ export const statistiqueViewFields = [
     { key: 'impressions', label: 'Impressions' },
     { key: 'clics', label: 'Clics' },
     { key: 'sessionsLanding', label: 'Sessions landing' },
-    { key: 'leadsGeneres', label: 'Leads générés' },
+    { key: 'prospectsGeneres', label: 'Prospects générés' },
     { key: 'coutTotal', label: 'Coût total', type: 'currency' },
-    { key: 'leadsTransmisClient', label: 'Leads transmis client' },
-    { key: 'leadsConvertis', label: 'Leads convertis' },
+    { key: 'prospectsTransmisClient', label: 'Prospects transmis client' },
+    { key: 'prospectsConvertis', label: 'Prospects convertis' },
     { key: 'sourceDonnees', label: 'Source' },
     { key: 'dateMiseAJour', label: 'Date mise à jour', type: 'date' }
 ];
@@ -364,7 +365,7 @@ export const CRM_TABS = [
     { key: 'programmes', icon: '🏗️', label: 'Programmes', entityName: 'programme' },
     { key: 'campagnes', icon: '🎯', label: 'Campagnes', entityName: 'campagne' },
     { key: 'landingpages', icon: '🌐', label: 'Landing Pages', entityName: 'landing page' },
-    { key: 'leads', icon: '👤', label: 'Leads', entityName: 'lead' },
+    { key: 'prospects', icon: '👤', label: 'Prospects', entityName: 'prospect' },
     { key: 'templates', icon: '✉️', label: 'Templates Email', entityName: 'template' },
     { key: 'statistiques', icon: '📊', label: 'Statistiques', entityName: 'statistique' }
 ];

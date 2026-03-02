@@ -49,7 +49,7 @@ export const clientsAPI = createEntityAPI('/clients');
 export const programmesAPI = createEntityAPI('/programmes');
 export const campagnesAPI = createEntityAPI('/campagnes');
 export const landingpagesAPI = createEntityAPI('/landingpages');
-export const leadsAPI = createEntityAPI('/leads');
+export const prospectsAPI = createEntityAPI('/prospects');
 export const templatesAPI = createEntityAPI('/templates');
 export const statistiquesAPI = createEntityAPI('/statistiques');
 

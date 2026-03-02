@@ -366,8 +366,14 @@ $header-height: 56px;
     .sidebar__title,
     .sidebar__item-label,
     .sidebar__item-count,
-    .sidebar__lp-ext,
-    .sidebar__section-label { display: none; }
+    .sidebar__lp-ext { display: none; }
+    .sidebar__section-label { 
+      font-size: 0.55rem; 
+      padding: 12px 6px 4px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .sidebar__nav, .sidebar__lp-section { padding: 0 8px; }
     .sidebar__item, .sidebar__lp-link { justify-content: center; padding: 10px 8px; }
   }

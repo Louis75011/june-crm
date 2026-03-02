@@ -15,7 +15,7 @@ app.use('/api/clients', createCrudRouter('clients.json', 'client'));
 app.use('/api/programmes', createCrudRouter('programmes.json', 'programme'));
 app.use('/api/campagnes', createCrudRouter('campagnes.json', 'campagne'));
 app.use('/api/landingpages', createCrudRouter('landingpages.json', 'landing page'));
-app.use('/api/leads', createCrudRouter('leads.json', 'lead'));
+app.use('/api/prospects', createCrudRouter('prospects.json', 'prospect'));
 app.use('/api/templates', createCrudRouter('templates.json', 'template'));
 app.use('/api/statistiques', createCrudRouter('statistiques.json', 'statistique'));
 app.use('/api/settings', settingsRouter);
@@ -28,6 +28,6 @@ app.get('/api/health', (req, res) => {
 // Démarrage
 app.listen(PORT, () => {
     console.log(`🚀 June Lab CRM — Serveur démarré sur http://localhost:${PORT}`);
-    console.log(`📋 Entités: clients, programmes, campagnes, landingpages, leads, templates, statistiques`);
+    console.log(`📋 Entités: clients, programmes, campagnes, landingpages, prospects, templates, statistiques`);
     console.log(`⚙️  Settings: http://localhost:${PORT}/api/settings`);
 });

@@ -26,4 +26,4 @@ dist-ssr
 notes.js
 
 # node server/index.js
-# pnpm dev
+# pnpm dev.env

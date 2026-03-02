@@ -4,10 +4,12 @@ import {
   DataTable,
   EntityForm,
   EntityViewModal,
+  Modal,
   ConfirmModal,
   Notification,
   SettingsModal,
-  InfoModal
+  InfoModal,
+  EmailPreview
 } from './components';
 import { useEntity } from './hooks/useEntity';
 import { useSettings } from './hooks/useSettings';
@@ -15,7 +17,7 @@ import { useNotification } from './hooks/useNotification';
 import { exportToCSV, parseCSV, triggerFileImport } from './utils/csvUtils';
 import {
   clientsAPI, programmesAPI, campagnesAPI,
-  landingpagesAPI, leadsAPI, templatesAPI, statistiquesAPI
+  landingpagesAPI, prospectsAPI, templatesAPI, statistiquesAPI
 } from './services/api';
 import {
   CRM_TABS,
@@ -23,7 +25,7 @@ import {
   programmeColumns, programmeFormFields, programmeViewFields,
   campagneColumns, campagneFormFields, campagneViewFields,
   landingpageColumns, landingpageFormFields, landingpageViewFields,
-  leadColumns, leadFormFields, leadViewFields,
+  prospectColumns, prospectFormFields, prospectViewFields,
   templateColumns, templateFormFields, templateViewFields,
   statistiqueColumns, statistiqueFormFields, statistiqueViewFields
 } from './data/crmSchema';
@@ -36,7 +38,7 @@ const SCHEMA_MAP = {
   programmes: { columns: programmeColumns, formFields: programmeFormFields, viewFields: programmeViewFields },
   campagnes: { columns: campagneColumns, formFields: campagneFormFields, viewFields: campagneViewFields },
   landingpages: { columns: landingpageColumns, formFields: landingpageFormFields, viewFields: landingpageViewFields },
-  leads: { columns: leadColumns, formFields: leadFormFields, viewFields: leadViewFields },
+  prospects: { columns: prospectColumns, formFields: prospectFormFields, viewFields: prospectViewFields },
   templates: { columns: templateColumns, formFields: templateFormFields, viewFields: templateViewFields },
   statistiques: { columns: statistiqueColumns, formFields: statistiqueFormFields, viewFields: statistiqueViewFields }
 };
@@ -53,13 +55,13 @@ function App() {
   const programmes = useEntity(programmesAPI, 'programme');
   const campagnes = useEntity(campagnesAPI, 'campagne');
   const landingpages = useEntity(landingpagesAPI, 'landing page');
-  const leads = useEntity(leadsAPI, 'lead');
+  const prospects = useEntity(prospectsAPI, 'prospect');
   const templates = useEntity(templatesAPI, 'template');
   const statistiques = useEntity(statistiquesAPI, 'statistique');
 
   const ENTITY_MAP = useMemo(() => ({
-    clients, programmes, campagnes, landingpages, leads, templates, statistiques
-  }), [clients, programmes, campagnes, landingpages, leads, templates, statistiques]);
+    clients, programmes, campagnes, landingpages, prospects, templates, statistiques
+  }), [clients, programmes, campagnes, landingpages, prospects, templates, statistiques]);
 
   // Lookup maps pour résoudre les relations (ID → nom)
   const lookupMaps = useMemo(() => ({
@@ -86,6 +88,7 @@ function App() {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [emailPreviewData, setEmailPreviewData] = useState(null);
 
   // Dark mode
   useEffect(() => {
@@ -188,7 +191,7 @@ function App() {
         </div>
 
         <nav className="sidebar__nav">
-          <div className="sidebar__section-label">Navigation</div>
+          <div className="sidebar__section-label">Navig.</div>
           {CRM_TABS.map(tab => (
             <button
               key={tab.key}
@@ -247,6 +250,17 @@ function App() {
             <button className="toolbar__btn toolbar__btn--outline" onClick={handleImport}>
               📤 Import
             </button>
+            {activeKey === 'templates' && (
+              <button
+                className="toolbar__btn toolbar__btn--outline"
+                onClick={() => setEmailPreviewData({
+                  prospect: prospects.items?.[0] || null,
+                  template: templates.items?.[0] || null
+                })}
+              >
+                👁️ Prévisualiser
+              </button>
+            )}
           </div>
           <div className="toolbar__right">
             <div className="toolbar__search">
@@ -331,6 +345,17 @@ function App() {
         isOpen={isInfoOpen}
         onClose={() => setIsInfoOpen(false)}
       />
+
+      {emailPreviewData && (
+        <Modal isOpen={true} onClose={() => setEmailPreviewData(null)}>
+          <EmailPreview
+            prospect={emailPreviewData.prospect}
+            template={emailPreviewData.template}
+            lookupMaps={lookupMaps}
+            onClose={() => setEmailPreviewData(null)}
+          />
+        </Modal>
+      )}
 
       {notification && (
         <Notification message={notification.message} type={notification.type} />

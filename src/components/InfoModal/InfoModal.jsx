@@ -3,30 +3,60 @@ import styles from './InfoModal.module.scss';
 
 const InfoModal = ({ isOpen, onClose }) => {
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title="ℹ️ Aide & Raccourcis">
+        <Modal isOpen={isOpen} onClose={onClose} title="ℹ️ Aide — June Lab CRM">
             <div className={styles.infoContent}>
                 <div className={styles.section}>
-                    <h4>🖱️ Navigation dans les tableaux</h4>
+                    <h4>🏢 Entités du CRM</h4>
                     <ul>
                         <li>
-                            <span className={styles.shortcut}>Clic</span>
-                            <span className={styles.desc}>Ouvre la fiche de visualisation du prospect ou partenariat</span>
+                            <span className={styles.action}>Clients</span>
+                            <span className={styles.desc}>Promoteurs, coopératives, bailleurs — les commanditaires de vos programmes</span>
                         </li>
                         <li>
-                            <span className={styles.shortcut}>Ctrl + Clic</span>
-                            <span className={styles.desc}>Ouvre directement le formulaire d'édition</span>
+                            <span className={styles.action}>Programmes</span>
+                            <span className={styles.desc}>Programmes immobiliers (neuf, BRS, rénovation) rattachés à un client</span>
                         </li>
                         <li>
-                            <span className={styles.shortcut}>Ctrl + Entrée</span>
-                            <span className={styles.desc}>Dans un formulaire ouvert, enregistre (bouton en bas à droite)</span>
+                            <span className={styles.action}>Campagnes</span>
+                            <span className={styles.desc}>Campagnes publicitaires (Meta Ads, Google Ads, newsletter) avec UTMs</span>
+                        </li>
+                        <li>
+                            <span className={styles.action}>Landing Pages</span>
+                            <span className={styles.desc}>Pages de captation de prospects, avec suivi des trackers (GA4, Meta Pixel)</span>
+                        </li>
+                        <li>
+                            <span className={styles.action}>Prospects</span>
+                            <span className={styles.desc}>Contacts issus des formulaires LP — avec suivi de statut et transmission client</span>
+                        </li>
+                        <li>
+                            <span className={styles.action}>Templates Email</span>
+                            <span className={styles.desc}>Emails de confirmation, relance et newsletter par programme</span>
+                        </li>
+                        <li>
+                            <span className={styles.action}>Statistiques</span>
+                            <span className={styles.desc}>KPIs par campagne : impressions, clics, sessions, prospects générés, coût</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className={styles.section}>
+                    <h4>🖱️ Navigation</h4>
+                    <ul>
+                        <li>
+                            <span className={styles.shortcut}>👁️ Voir</span>
+                            <span className={styles.desc}>Ouvre la fiche détaillée d'un élément (avec résolution des relations)</span>
+                        </li>
+                        <li>
+                            <span className={styles.shortcut}>✏️ Modifier</span>
+                            <span className={styles.desc}>Ouvre le formulaire d'édition</span>
+                        </li>
+                        <li>
+                            <span className={styles.shortcut}>🗑️ Supprimer</span>
+                            <span className={styles.desc}>Supprime avec confirmation</span>
                         </li>
                         <li>
                             <span className={styles.shortcut}>Échap</span>
-                            <span className={styles.desc}>Ferme la fenêtre (équivalent à Annuler ou la croix)</span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>Clic hors fenêtre</span>
-                            <span className={styles.desc}>Ferme la fenêtre sans enregistrer</span>
+                            <span className={styles.desc}>Ferme la fenêtre modale active</span>
                         </li>
                     </ul>
                 </div>
@@ -35,67 +65,29 @@ const InfoModal = ({ isOpen, onClose }) => {
                     <h4>📋 Gestion des données</h4>
                     <ul>
                         <li>
-                            <span className={styles.action}>+ AJOUTER</span>
-                            <span className={styles.desc}>Créer un nouveau prospect</span>
+                            <span className={styles.action}>+ Ajouter</span>
+                            <span className={styles.desc}>Créer un nouvel élément dans l'entité active</span>
                         </li>
                         <li>
-                            <span className={styles.action}>📥 EXPORT</span>
-                            <span className={styles.desc}>Télécharger les données en CSV</span>
+                            <span className={styles.action}>📥 Export</span>
+                            <span className={styles.desc}>Télécharger les données de l'onglet actif en CSV</span>
                         </li>
                         <li>
-                            <span className={styles.action}>📤 IMPORT</span>
+                            <span className={styles.action}>📤 Import</span>
                             <span className={styles.desc}>Importer des données depuis un fichier CSV</span>
+                        </li>
+                        <li>
+                            <span className={styles.action}>🔍 Recherche</span>
+                            <span className={styles.desc}>Filtre instantané sur tous les champs de l'onglet courant</span>
                         </li>
                     </ul>
                 </div>
 
                 <div className={styles.section}>
-                    <h4>🔍 Recherche avancée</h4>
-                    <p>La barre de recherche filtre sur tous les champs. Syntaxes disponibles :</p>
-                    <ul>
-                        <li>
-                            <span className={styles.shortcut}>mots libres</span>
-                            <span className={styles.desc}>ET implicite — tous doivent être présents : <em>restaurant paris</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>"phrase"</span>
-                            <span className={styles.desc}>Phrase exacte entre guillemets : <em>"en cours"</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>[a, b, ...]</span>
-                            <span className={styles.desc}>OU global — cherche dans tous les champs : <em>[en cours, courant de l'année]</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>champ:valeur</span>
-                            <span className={styles.desc}>Cible un champ précis : <em>statut:froid</em> — <em>ville:paris</em> — <em>canal:instagram</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>champ:[a, b]</span>
-                            <span className={styles.desc}>OU ciblé sur un champ : <em>statut:[en cours, courant de l'année]</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>-mot</span>
-                            <span className={styles.desc}>Exclusion globale : <em>artisan -refusé</em> — retire tout ce qui contient ce mot</span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>-champ:valeur</span>
-                            <span className={styles.desc}>Exclusion ciblée : <em>-statut:froid</em> — mot seul sans espace</span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>-champ:[a,b]</span>
-                            <span className={styles.desc}>Exclure plusieurs (avec ou sans espaces) : <em>-statut:[à contacter, froid, refusé]</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>-champ:"phrase"</span>
-                            <span className={styles.desc}>Exclure une valeur avec espace : <em>-statut:"sans réponse"</em></span>
-                        </li>
-                        <li>
-                            <span className={styles.shortcut}>combiner</span>
-                            <span className={styles.desc}><em>statut:[en cours, courant de l'année] -statut:[à contacter, froid]</em></span>
-                        </li>
-                    </ul>
-                    <p style={{ fontSize: '0.75rem', color: '#888', marginTop: '0.5rem' }}>
-                        Champs disponibles : <em>statut, nom, ville, contact, secteur, canal, priorite, notes, tel, email, action, adresse</em>
+                    <h4>🔗 Relations & Lookups</h4>
+                    <p>Les IDs de relations (clientId, programmeId, campagneId…) sont automatiquement résolus en noms lisibles dans les tableaux et fiches détaillées.</p>
+                    <p style={{ fontSize: '0.78rem', color: '#888', marginTop: '0.5rem' }}>
+                        Liens rapides vers les Landing Pages déployées disponibles dans la barre latérale.
                     </p>
                 </div>
 

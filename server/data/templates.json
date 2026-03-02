@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nom": "Confirmation inscription – Les Traversées",
+    "programmeId": 1,
+    "typeTemplate": "Confirmation",
+    "statut": "Validé",
+    "dateLivraison": "2026-01-25",
+    "espCible": "Brevo",
+    "compatibleMobile": true,
+    "testeLitmus": true,
+    "notes": "Template responsive, validé par le client.",
+    "createdAt": "2026-01-20T10:00:00.000Z",
+    "updatedAt": "2026-01-25T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nom": "Relance J+3 – Les Traversées",
+    "programmeId": 1,
+    "typeTemplate": "Relance",
+    "statut": "En validation",
+    "dateLivraison": null,
+    "espCible": "Brevo",
+    "compatibleMobile": true,
+    "testeLitmus": false,
+    "notes": "En attente de validation client.",
+    "createdAt": "2026-02-10T10:00:00.000Z",
+    "updatedAt": "2026-02-10T10:00:00.000Z"
+  }
+]

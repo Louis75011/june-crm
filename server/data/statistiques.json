@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "campagneId": 1,
+    "periode": "Février 2026",
+    "impressions": 45200,
+    "clics": 1820,
+    "sessionsLanding": 2340,
+    "leadsGeneres": 4,
+    "coutTotal": 3500,
+    "leadsTransmisClient": 3,
+    "leadsConvertis": 1,
+    "sourceDonnees": "Meta",
+    "dateMiseAJour": "2026-03-01",
+    "createdAt": "2026-03-01T10:00:00.000Z",
+    "updatedAt": "2026-03-01T10:00:00.000Z"
+  }
+]

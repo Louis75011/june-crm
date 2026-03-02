@@ -3,351 +3,254 @@ import {
   Header,
   Controls,
   Tabs,
-  ProspectsTable,
-  PartenariatsTable,
-  PartenariatForm,
-  PartenariatViewModal,
-  Stats,
-  RelanceCalendar,
-  Strategies,
-  ProspectForm,
+  DataTable,
+  EntityForm,
+  EntityViewModal,
   ConfirmModal,
-  ProspectViewModal,
   Notification,
   SettingsModal,
   InfoModal
 } from './components';
-import { useProspects } from './hooks/useProspects';
-import { usePartenariats } from './hooks/usePartenariats';
+import { useEntity } from './hooks/useEntity';
 import { useSettings } from './hooks/useSettings';
 import { useNotification } from './hooks/useNotification';
 import { exportToCSV, parseCSV, triggerFileImport } from './utils/csvUtils';
+import {
+  clientsAPI, programmesAPI, campagnesAPI,
+  landingpagesAPI, leadsAPI, templatesAPI, statistiquesAPI
+} from './services/api';
+import {
+  CRM_TABS,
+  clientColumns, clientFormFields, clientViewFields,
+  programmeColumns, programmeFormFields, programmeViewFields,
+  campagneColumns, campagneFormFields, campagneViewFields,
+  landingpageColumns, landingpageFormFields, landingpageViewFields,
+  leadColumns, leadFormFields, leadViewFields,
+  templateColumns, templateFormFields, templateViewFields,
+  statistiqueColumns, statistiqueFormFields, statistiqueViewFields
+} from './data/crmSchema';
 import './App.scss';
 
+// Map API par clé d'onglet
+const API_MAP = {
+  clients: clientsAPI,
+  programmes: programmesAPI,
+  campagnes: campagnesAPI,
+  landingpages: landingpagesAPI,
+  leads: leadsAPI,
+  templates: templatesAPI,
+  statistiques: statistiquesAPI
+};
+
+// Map colonnes/champs par clé d'onglet
+const SCHEMA_MAP = {
+  clients:       { columns: clientColumns, formFields: clientFormFields, viewFields: clientViewFields },
+  programmes:    { columns: programmeColumns, formFields: programmeFormFields, viewFields: programmeViewFields },
+  campagnes:     { columns: campagneColumns, formFields: campagneFormFields, viewFields: campagneViewFields },
+  landingpages:  { columns: landingpageColumns, formFields: landingpageFormFields, viewFields: landingpageViewFields },
+  leads:         { columns: leadColumns, formFields: leadFormFields, viewFields: leadViewFields },
+  templates:     { columns: templateColumns, formFields: templateFormFields, viewFields: templateViewFields },
+  statistiques:  { columns: statistiqueColumns, formFields: statistiqueFormFields, viewFields: statistiqueViewFields }
+};
+
 function App() {
-  const { prospects, loading: prospectsLoading, addProspect, updateProspect, deleteProspect, importProspects, getStats } = useProspects();
-  const { partenariats, loading: partenariatsLoading, addPartenariat, updatePartenariat, deletePartenariat } = usePartenariats();
+  // Hooks entités
+  const clients       = useEntity(clientsAPI, 'client');
+  const programmes    = useEntity(programmesAPI, 'programme');
+  const campagnes     = useEntity(campagnesAPI, 'campagne');
+  const landingpages  = useEntity(landingpagesAPI, 'landing page');
+  const leads         = useEntity(leadsAPI, 'lead');
+  const templates     = useEntity(templatesAPI, 'template');
+  const statistiques  = useEntity(statistiquesAPI, 'statistique');
+
+  const ENTITY_MAP = useMemo(() => ({
+    clients, programmes, campagnes, landingpages, leads, templates, statistiques
+  }), [clients, programmes, campagnes, landingpages, leads, templates, statistiques]);
+
   const { settings, saveSettings } = useSettings();
   const { notification, showNotification } = useNotification();
 
   const [searchFilter, setSearchFilter] = useState('');
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editingProspect, setEditingProspect] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [prospectToDelete, setProspectToDelete] = useState(null);
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [viewingProspect, setViewingProspect] = useState(null);
-  const [isPartenariatAddOpen, setIsPartenariatAddOpen] = useState(false);
-  const [isPartenariatEditOpen, setIsPartenariatEditOpen] = useState(false);
-  const [editingPartenariat, setEditingPartenariat] = useState(null);
-  const [isPartenariatViewOpen, setIsPartenariatViewOpen] = useState(false);
-  const [viewingPartenariat, setViewingPartenariat] = useState(null);
-  const [isPartenariatDeleteOpen, setIsPartenariatDeleteOpen] = useState(false);
-  const [partenariatToDelete, setPartenariatToDelete] = useState(null);
+
+  // Modals
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  const [viewingItem, setViewingItem] = useState(null);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
-  // Appliquer le dark mode
+  // Dark mode
   useEffect(() => {
     document.body.classList.toggle('dark-mode', settings.darkMode);
   }, [settings.darkMode]);
 
-  // Sauvegarder les paramètres
-  const handleSaveSettings = useCallback(async (newSettings) => {
-    try {
-      await saveSettings(newSettings);
-      showNotification('Paramètres enregistrés !');
-    } catch (err) {
-      showNotification('Erreur lors de la sauvegarde', 'error');
-    }
-  }, [saveSettings, showNotification]);
+  // Onglet actif
+  const activeTab = CRM_TABS[activeTabIndex] || CRM_TABS[0];
+  const activeKey = activeTab.key;
+  const activeEntity = ENTITY_MAP[activeKey];
+  const activeSchema = SCHEMA_MAP[activeKey];
 
-  const stats = useMemo(() => getStats(), [getStats]);
-
-  // Handlers
-  const handleAddProspect = useCallback(async (prospectData) => {
+  // Handlers CRUD
+  const handleAdd = useCallback(async (data) => {
     try {
-      await addProspect(prospectData);
-      showNotification('Prospect ajouté avec succès!');
-    } catch (err) {
+      await activeEntity.addItem(data);
+      showNotification(`${activeTab.entityName} ajouté(e) !`);
+    } catch {
       showNotification('Erreur lors de l\'ajout', 'error');
     }
-  }, [addProspect, showNotification]);
+  }, [activeEntity, activeTab, showNotification]);
 
-  const handleAddPartenariat = useCallback(async (partenariatData) => {
+  const handleEdit = useCallback((item) => {
+    setEditingItem(item);
+    setIsEditOpen(true);
+  }, []);
+
+  const handleSaveEdit = useCallback(async (data) => {
+    if (!editingItem) return;
     try {
-      await addPartenariat(partenariatData);
-      showNotification('Partenariat ajouté avec succès!');
-    } catch (err) {
-      showNotification('Erreur lors de l\'ajout', 'error');
+      await activeEntity.updateItem(editingItem.id, data);
+      showNotification(`${activeTab.entityName} mis(e) à jour !`);
+      setEditingItem(null);
+    } catch {
+      showNotification('Erreur lors de la modification', 'error');
     }
-  }, [addPartenariat, showNotification]);
+  }, [editingItem, activeEntity, activeTab, showNotification]);
 
-  const handleEditProspect = useCallback((prospect) => {
-    setEditingProspect(prospect);
-    setIsEditModalOpen(true);
+  const handleDelete = useCallback((id) => {
+    setItemToDelete(id);
+    setIsDeleteOpen(true);
   }, []);
 
-  const handleViewProspect = useCallback((prospect) => {
-    setViewingProspect(prospect);
-    setIsViewModalOpen(true);
-  }, []);
-
-  const handleEditPartenariat = useCallback((partenariat) => {
-    setEditingPartenariat(partenariat);
-    setIsPartenariatEditOpen(true);
-  }, []);
-
-  const handleViewPartenariat = useCallback((partenariat) => {
-    setViewingPartenariat(partenariat);
-    setIsPartenariatViewOpen(true);
-  }, []);
-
-  const handleSaveProspect = useCallback(async (prospectData) => {
-    if (editingProspect) {
-      try {
-        await updateProspect(editingProspect.id, prospectData);
-        showNotification('Prospect mis à jour!');
-        setEditingProspect(null);
-      } catch (err) {
-        showNotification('Erreur lors de la mise à jour', 'error');
-      }
+  const confirmDelete = useCallback(async () => {
+    if (!itemToDelete) return;
+    try {
+      await activeEntity.deleteItem(itemToDelete);
+      showNotification(`${activeTab.entityName} supprimé(e)`);
+      setIsDeleteOpen(false);
+      setItemToDelete(null);
+    } catch {
+      showNotification('Erreur lors de la suppression', 'error');
     }
-  }, [editingProspect, updateProspect, showNotification]);
+  }, [itemToDelete, activeEntity, activeTab, showNotification]);
 
-  const handleDeleteProspect = useCallback((id) => {
-    setProspectToDelete(id);
-    setIsDeleteModalOpen(true);
+  const handleView = useCallback((item) => {
+    setViewingItem(item);
+    setIsViewOpen(true);
   }, []);
 
-  const handleDeletePartenariat = useCallback((id) => {
-    setPartenariatToDelete(id);
-    setIsPartenariatDeleteOpen(true);
-  }, []);
-
-  const confirmDeleteProspect = useCallback(async () => {
-    if (prospectToDelete) {
-      try {
-        await deleteProspect(prospectToDelete);
-        showNotification('Prospect supprimé');
-        setIsDeleteModalOpen(false);
-        setProspectToDelete(null);
-      } catch (err) {
-        showNotification('Erreur lors de la suppression', 'error');
-      }
-    }
-  }, [prospectToDelete, deleteProspect, showNotification]);
-
-  const cancelDeleteProspect = useCallback(() => {
-    setIsDeleteModalOpen(false);
-    setProspectToDelete(null);
-  }, []);
-
-  const confirmDeletePartenariat = useCallback(async () => {
-    if (partenariatToDelete) {
-      try {
-        await deletePartenariat(partenariatToDelete);
-        showNotification('Partenariat supprimé');
-        setIsPartenariatDeleteOpen(false);
-        setPartenariatToDelete(null);
-      } catch (err) {
-        showNotification('Erreur lors de la suppression', 'error');
-      }
-    }
-  }, [partenariatToDelete, deletePartenariat, showNotification]);
-
-  const cancelDeletePartenariat = useCallback(() => {
-    setIsPartenariatDeleteOpen(false);
-    setPartenariatToDelete(null);
-  }, []);
-
-  const handleSavePartenariat = useCallback(async (partenariatData) => {
-    if (editingPartenariat) {
-      try {
-        await updatePartenariat(editingPartenariat.id, partenariatData);
-        showNotification('Partenariat mis à jour!');
-        setEditingPartenariat(null);
-      } catch (err) {
-        showNotification('Erreur lors de la mise à jour', 'error');
-      }
-    }
-  }, [editingPartenariat, updatePartenariat, showNotification]);
-
+  // Export / Import CSV
   const handleExport = useCallback(() => {
-    exportToCSV(prospects);
-    showNotification('CSV exporté avec succès!');
-  }, [prospects, showNotification]);
+    exportToCSV(activeEntity.items, activeSchema.columns, `JuneLab-${activeKey}`);
+    showNotification(`CSV ${activeTab.label} exporté !`);
+  }, [activeEntity, activeSchema, activeKey, activeTab, showNotification]);
 
   const handleImport = useCallback(() => {
     triggerFileImport(async (csvContent) => {
       try {
-        const newProspects = parseCSV(csvContent);
-        if (newProspects.length > 0) {
-          await importProspects(newProspects);
-          showNotification(`${newProspects.length} prospect(s) importé(s)!`);
+        const newItems = parseCSV(csvContent, activeSchema.formFields);
+        if (newItems.length > 0) {
+          await activeEntity.importItems(newItems);
+          showNotification(`${newItems.length} ${activeTab.entityName}(s) importé(s) !`);
         } else {
-          showNotification('Aucun prospect trouvé dans le fichier', 'error');
+          showNotification('Aucune donnée trouvée dans le fichier', 'error');
         }
       } catch {
         showNotification('Erreur lors de l\'import', 'error');
       }
     });
-  }, [importProspects, showNotification]);
+  }, [activeEntity, activeSchema, activeTab, showNotification]);
 
-  // Configuration des onglets
-  const tabs = useMemo(() => [
-    {
-      icon: '📊',
-      label: 'TABLEAU PROSPECTS',
-      type: 'prospects',
+  // Settings
+  const handleSaveSettings = useCallback(async (newSettings) => {
+    try {
+      await saveSettings(newSettings);
+      showNotification('Paramètres enregistrés !');
+    } catch {
+      showNotification('Erreur lors de la sauvegarde', 'error');
+    }
+  }, [saveSettings, showNotification]);
+
+  // Tabs config
+  const tabs = useMemo(() =>
+    CRM_TABS.map(tab => ({
+      icon: tab.icon,
+      label: tab.label,
       content: (
-        <ProspectsTable
-          prospects={prospects}
+        <DataTable
+          columns={SCHEMA_MAP[tab.key].columns}
+          data={ENTITY_MAP[tab.key].items}
           searchFilter={searchFilter}
-          onEdit={handleEditProspect}
-          onDelete={handleDeleteProspect}
-          onView={handleViewProspect}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          onView={handleView}
           maxChars={settings.maxChars}
         />
       )
-    },
-    {
-      icon: '📈',
-      label: 'STATISTIQUES',
-      content: <Stats stats={stats} />
-    },
-    {
-      icon: '⏰',
-      label: 'CALENDRIER RELANCES',
-      content: <RelanceCalendar />
-    },
-    {
-      icon: '🎯',
-      label: 'STRATÉGIES DIGITALES',
-      content: <Strategies />
-    },
-    {
-      icon: '🤝',
-      label: 'TABLEAU PARTENARIATS',
-      type: 'partenariats',
-      content: (
-        <PartenariatsTable
-          partenariats={partenariats}
-          searchFilter={searchFilter}
-          onEdit={handleEditPartenariat}
-          onDelete={handleDeletePartenariat}
-          onView={handleViewPartenariat}
-          maxChars={settings.maxChars}
-        />
-      )
-    }
-  ], [prospects, partenariats, searchFilter, stats, settings.maxChars, handleEditProspect, handleDeleteProspect, handleViewProspect, handleEditPartenariat, handleDeletePartenariat, handleViewPartenariat]);
-
-  const activeTabType = tabs[activeTabIndex]?.type || 'prospects';
-  const addLabel = activeTabType === 'partenariats'
-    ? 'Ajouter un partenaire'
-    : 'Ajouter un prospect';
-
-  const handleAddClick = useCallback(() => {
-    if (activeTabType === 'partenariats') {
-      setIsPartenariatAddOpen(true);
-      return;
-    }
-    setIsAddModalOpen(true);
-  }, [activeTabType]);
+    })),
+  [ENTITY_MAP, searchFilter, settings.maxChars, handleEdit, handleDelete, handleView]);
 
   return (
     <div className="container">
-      <Header />
+      <Header adminUser={settings.adminUser} />
 
       <Controls
-        onAddClick={handleAddClick}
+        onAddClick={() => setIsAddOpen(true)}
         onExportClick={handleExport}
         onImportClick={handleImport}
         onSettingsClick={() => setIsSettingsOpen(true)}
         onInfoClick={() => setIsInfoOpen(true)}
-        addLabel={addLabel}
-        addContext={activeTabType}
+        addLabel={`+ ${activeTab.entityName}`}
+        addContext={activeKey}
         searchValue={searchFilter}
         onSearchChange={setSearchFilter}
       />
 
       <Tabs tabs={tabs} onTabChange={setActiveTabIndex} />
 
-      <ProspectForm
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onSubmit={handleAddProspect}
+      {/* Modal ajout */}
+      <EntityForm
+        isOpen={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+        onSubmit={handleAdd}
+        fields={activeSchema.formFields}
+        title={`Ajouter ${activeTab.entityName}`}
         mode="add"
       />
 
-      <PartenariatForm
-        isOpen={isPartenariatAddOpen}
-        onClose={() => setIsPartenariatAddOpen(false)}
-        onSubmit={handleAddPartenariat}
-        mode="add"
-      />
-
-      <ProspectForm
-        isOpen={isEditModalOpen}
-        onClose={() => {
-          setIsEditModalOpen(false);
-          setEditingProspect(null);
-        }}
-        onSubmit={handleSaveProspect}
-        prospect={editingProspect}
+      {/* Modal édition */}
+      <EntityForm
+        isOpen={isEditOpen}
+        onClose={() => { setIsEditOpen(false); setEditingItem(null); }}
+        onSubmit={handleSaveEdit}
+        fields={activeSchema.formFields}
+        initialData={editingItem}
+        title={`Modifier ${activeTab.entityName}`}
         mode="edit"
       />
 
+      {/* Modal vue détaillée */}
+      <EntityViewModal
+        isOpen={isViewOpen}
+        onClose={() => { setIsViewOpen(false); setViewingItem(null); }}
+        data={viewingItem}
+        fields={activeSchema.viewFields}
+        title={`Détail ${activeTab.entityName}`}
+      />
+
+      {/* Modal confirmation suppression */}
       <ConfirmModal
-        isOpen={isDeleteModalOpen}
-        onClose={cancelDeleteProspect}
-        onConfirm={confirmDeleteProspect}
+        isOpen={isDeleteOpen}
+        onClose={() => { setIsDeleteOpen(false); setItemToDelete(null); }}
+        onConfirm={confirmDelete}
         title="Confirmer la suppression"
-        message="Êtes-vous sûr de vouloir supprimer ce prospect ? Cette action est irréversible."
+        message={`Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.`}
         confirmText="Supprimer"
         cancelText="Annuler"
-      />
-
-      <PartenariatForm
-        isOpen={isPartenariatEditOpen}
-        onClose={() => {
-          setIsPartenariatEditOpen(false);
-          setEditingPartenariat(null);
-        }}
-        onSubmit={handleSavePartenariat}
-        partenariat={editingPartenariat}
-        mode="edit"
-      />
-
-      <ConfirmModal
-        isOpen={isPartenariatDeleteOpen}
-        onClose={cancelDeletePartenariat}
-        onConfirm={confirmDeletePartenariat}
-        title="Confirmer la suppression"
-        message="Êtes-vous sûr de vouloir supprimer ce partenariat ? Cette action est irréversible."
-        confirmText="Supprimer"
-        cancelText="Annuler"
-      />
-
-      <ProspectViewModal
-        isOpen={isViewModalOpen}
-        onClose={() => {
-          setIsViewModalOpen(false);
-          setViewingProspect(null);
-        }}
-        prospect={viewingProspect}
-      />
-
-      <PartenariatViewModal
-        isOpen={isPartenariatViewOpen}
-        onClose={() => {
-          setIsPartenariatViewOpen(false);
-          setViewingPartenariat(null);
-        }}
-        partenariat={viewingPartenariat}
       />
 
       <SettingsModal

@@ -1,0 +1,109 @@
+.formContainer {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary, #111827);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary, #6b7280);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.required {
+    color: #ef4444;
+    margin-left: 2px;
+}
+
+.input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background: var(--bg-input, #fff);
+    color: var(--text-primary, #111827);
+    transition: border-color 0.15s;
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary, #e05d26);
+        box-shadow: 0 0 0 3px rgba(224, 93, 38, 0.1);
+    }
+}
+
+textarea.input {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--color-primary, #e05d26);
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.btnCancel {
+    padding: 8px 20px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--bg-hover, #f3f4f6);
+    }
+}
+
+.btnSubmit {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--color-primary, #e05d26);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}

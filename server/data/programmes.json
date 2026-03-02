@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "nom": "Les Traversées",
+    "clientId": 1,
+    "ville": "Saint-Denis",
+    "adresse": "Rue du Programme, 93200 Saint-Denis",
+    "typeProgramme": "BRS",
+    "nombreLots": 50,
+    "prixAPartirDe": 185000,
+    "dateLancementCommercial": "2026-01-20",
+    "dateLivraisonPrevisionnelle": "2028-06-01",
+    "statut": "Commercialisation",
+    "charteCouleur": "#1A365D",
+    "briefCreatif": "Programme BRS à Saint-Denis, cible primo-accédants franciliens.",
+    "createdAt": "2026-01-15T10:00:00.000Z",
+    "updatedAt": "2026-01-15T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nom": "Résidence Lumière",
+    "clientId": 2,
+    "ville": "Montreuil",
+    "adresse": "15 boulevard de la République, 93100 Montreuil",
+    "typeProgramme": "Neuf",
+    "nombreLots": 35,
+    "prixAPartirDe": 245000,
+    "dateLancementCommercial": "2026-03-15",
+    "dateLivraisonPrevisionnelle": "2028-12-01",
+    "statut": "En préparation",
+    "charteCouleur": "#E67E22",
+    "briefCreatif": "Programme neuf standing à Montreuil, cible investisseurs et familles.",
+    "createdAt": "2026-02-01T10:00:00.000Z",
+    "updatedAt": "2026-02-01T10:00:00.000Z"
+  }
+]

@@ -1,69 +1,94 @@
-$blue-mary: #1F3A52;
-$red-crm: #960018;
-$gold: #C5A666;
+$dark-bg: #1a1a2e;
+$orange-primary: #e05d26;
 $white: #FFFFFF;
 
 .header {
-  background: linear-gradient(135deg, $blue-mary, $red-crm);
+  background: $dark-bg;
   color: $white;
-  padding: 20px 30px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
 }
 
 .headerContent {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.logo {
-  height: 90px;
-  width: auto;
-  flex-shrink: 0;
-  border-radius: 50px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logoIcon {
+  font-size: 1.6rem;
+  color: $orange-primary;
 }
 
 .headerText {
   text-align: left;
 
   h1 {
-    font-size: 2.2em;
-    margin-bottom: 5px;
-    letter-spacing: 0.5px;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
   }
 
   p {
-    font-size: 0.95em;
-    opacity: 0.95;
-    font-style: italic;
+    font-size: 0.8em;
+    opacity: 0.7;
+    font-weight: 400;
   }
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.userAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: $orange-primary;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 15px 20px;
+    padding: 12px 16px;
   }
 
   .headerContent {
     flex-direction: column;
-    gap: 15px;
-  }
-
-  .logo {
-    height: 50px;
+    gap: 12px;
   }
 
   .headerText {
     text-align: center;
 
     h1 {
-      font-size: 1.6em;
+      font-size: 1.2em;
     }
 
     p {
-      font-size: 0.85em;
+      font-size: 0.75em;
     }
   }
 }

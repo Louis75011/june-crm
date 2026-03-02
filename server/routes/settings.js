@@ -5,13 +5,16 @@ const router = Router();
 const SETTINGS_FILE = 'settings.json';
 
 const DEFAULT_SETTINGS = {
-    maxChars: 500,
-    darkMode: false
+    darkMode: false,
+    maxChars: 80,
+    adminUser: {
+        name: 'Alexia Belle-Croix',
+        email: 'alexia@junelabs.fr',
+        role: 'admin',
+        initials: 'AB'
+    }
 };
 
-/**
- * GET /api/settings - Récupérer les paramètres
- */
 router.get('/', async (req, res) => {
     try {
         const settings = await readJsonFile(SETTINGS_FILE);
@@ -22,9 +25,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-/**
- * PUT /api/settings - Mettre à jour les paramètres
- */
 router.put('/', async (req, res) => {
     try {
         const current = await readJsonFile(SETTINGS_FILE) || DEFAULT_SETTINGS;

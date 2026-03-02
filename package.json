@@ -1,14 +1,13 @@
 {
-  "name": "arx-crm-prospection",
+  "name": "june-lab-crm",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "dev:full": "concurrently \"pnpm run server\" \"pnpm run dev\"",
     "server": "node server/index.js",
-    "sync": "node scripts/sync-data.js",
-    "build": "node scripts/sync-data.js && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "nom": "LP Les Traversées – Lancement V1",
+    "programmeId": 1,
+    "url": "https://lestraversees.junelabs.fr",
+    "typePage": "Landing complète",
+    "statut": "Live",
+    "dateMiseEnLigne": "2026-02-01",
+    "ga4Installe": true,
+    "metaPixelInstalle": true,
+    "clarityInstalle": true,
+    "utmsConfigures": true,
+    "formulaireActif": true,
+    "sessions": 2340,
+    "lienMaquetteFigma": "https://figma.com/file/xxx",
+    "notes": "V1 lancée le 01/02, formulaire connecté Brevo.",
+    "createdAt": "2026-01-20T10:00:00.000Z",
+    "updatedAt": "2026-03-01T10:00:00.000Z"
+  }
+]

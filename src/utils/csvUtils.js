@@ -1,54 +1,71 @@
-// Export CSV
-export const exportToCSV = (prospects) => {
-    let csv = 'Nom Entreprise,Secteur,Ville,Contact,Téléphone,Email,Canal,Statut,Dernier Contact,Prochaine Action,Projet (délai)\n';
-    prospects.forEach(p => {
-        csv += `"${p.nomEntreprise}","${p.secteur}","${p.ville}","${p.contactCle}","${p.telephone}","${p.email}","${p.canal}","${p.statut}","${p.dernierContact}","${p.prochaiAction}","${p.projetEcheance || ''}"\n`;
+/**
+ * Export CSV générique pour les entités June Lab CRM
+ * @param {Array} items - Données à exporter
+ * @param {Array} columns - Colonnes [{ key, label }]
+ * @param {string} filename - Nom du fichier (sans extension)
+ */
+export const exportToCSV = (items, columns, filename = 'export') => {
+    if (!items || items.length === 0) return;
+
+    const headers = columns.map(c => c.label);
+    const rows = items.map(item =>
+        columns.map(c => {
+            const val = item[c.key];
+            if (val === null || val === undefined) return '';
+            if (typeof val === 'boolean') return val ? 'Oui' : 'Non';
+            return String(val).replace(/"/g, '""');
+        })
+    );
+
+    let csv = headers.map(h => `"${h}"`).join(',') + '\n';
+    rows.forEach(row => {
+        csv += row.map(cell => `"${cell}"`).join(',') + '\n';
     });
 
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', `CRM-Prospects-${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `${filename}-${new Date().toISOString().split('T')[0]}.csv`);
     link.click();
     URL.revokeObjectURL(url);
 };
 
-// Import CSV
-export const parseCSV = (csvContent) => {
-    const lines = csvContent.split('\n').slice(1);
-    const prospects = [];
+/**
+ * Import CSV générique
+ * @param {string} csvContent - Contenu CSV brut
+ * @param {Array} columns - Colonnes attendues [{ key, label, type }]
+ * @returns {Array} items parsés
+ */
+export const parseCSV = (csvContent, columns) => {
+    const lines = csvContent.split('\n').slice(1); // skip header
+    const items = [];
 
     lines.forEach(line => {
         if (!line.trim()) return;
-        const cells = line.match(/"[^"]*"|[^,]*/g)?.map(c => c.replace(/"/g, '').trim()) || [];
+        const cells = line.match(/"[^"]*"|[^,]*/g)?.map(c => c.replace(/^"|"$/g, '').replace(/""/g, '"').trim()) || [];
 
-        if (cells.length >= 10) {
-            prospects.push({
-                nomEntreprise: cells[0] || '',
-                secteur: cells[1] || '',
-                adresse: '',
-                ville: cells[2] || '',
-                telephone: cells[4] || '',
-                email: cells[5] || '',
-                website: '',
-                contactCle: cells[3] || '',
-                canal: cells[6] || '',
-                dateContact: new Date().toISOString().split('T')[0],
-                statut: cells[7] || 'À contacter',
-                repondu: 'NON',
-                dernierContact: cells[8] || '',
-                prochaiAction: cells[9] || '',
-                projetEcheance: cells[10] || '',
-                notes: ''
+        if (cells.length >= columns.length) {
+            const item = {};
+            columns.forEach((col, idx) => {
+                let val = cells[idx] || '';
+                if (col.type === 'boolean' || col.type === 'checkbox') {
+                    val = val.toLowerCase() === 'oui' || val === 'true' || val === '1';
+                } else if (col.type === 'number' || col.type === 'currency') {
+                    val = val ? Number(val) : null;
+                }
+                item[col.key] = val;
             });
+            items.push(item);
         }
     });
 
-    return prospects;
+    return items;
 };
 
-// Créer un input file pour l'import
+/**
+ * Crée un input file pour l'import CSV
+ */
 export const triggerFileImport = (callback) => {
     const input = document.createElement('input');
     input.type = 'file';

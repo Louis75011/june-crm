@@ -1,4 +1,10 @@
 {
-  "maxChars": 30,
-  "darkMode": false
+  "darkMode": false,
+  "maxChars": 80,
+  "adminUser": {
+    "name": "Alexia Belle-Croix",
+    "email": "alexia@junelabs.fr",
+    "role": "admin",
+    "initials": "AB"
+  }
 }
